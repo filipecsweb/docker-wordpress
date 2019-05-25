@@ -47,7 +47,8 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 
 # Install mariadb-client
 # https://downloads.mariadb.org/mariadb/repositories/#mirror=UFSCar&distro=Debian&distro_release=stretch--stretch&version=10.3
-RUN apt-get update; \
+RUN MARIADB_MAJOR=${MARIADB_MAJOR:-10.3} \
+    apt-get update; \
     apt-get install -y software-properties-common dirmngr
 RUN apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xF1656F24C74CD1D8
 RUN add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://mirror.ufscar.br/mariadb/repo/$MARIADB_MAJOR/debian stretch main'; \
