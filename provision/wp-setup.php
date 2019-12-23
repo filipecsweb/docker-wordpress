@@ -1,5 +1,5 @@
 <?php
-file_put_contents( ABSPATH . '/.gitignore', file_get_contents( ABSPATH . '/.mygitignore' ) );
+file_put_contents( ABSPATH . '/.gitignore', file_get_contents( ABSPATH . '/mygitignore' ) );
 
 wp_update_term( 1, 'category', [
 	'name' => 'SEM CATEGORIA',
