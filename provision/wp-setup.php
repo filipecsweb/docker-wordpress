@@ -17,6 +17,7 @@ $id = wp_insert_post( [
 ], true );
 
 if ( ! is_wp_error( $id ) ) {
+	update_option( 'show_on_front', 'page' );
 	update_option( 'page_on_front', $id );
 }
 
