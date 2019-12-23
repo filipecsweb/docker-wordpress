@@ -1,0 +1,54 @@
+version: '3'
+
+volumes:
+  db_var_lib_mysql: {}
+
+services:
+  mariadb:
+    container_name: ${SLUG}_mariadb # Works like and ID. IT has to be unique.
+    volumes:
+      - db_var_lib_mysql:/var/lib/mysql
+    environment:
+      - "MYSQL_ROOT_PASSWORD=root"
+      - "MYSQL_DATABASE=$DB_NAME"
+      - "MYSQL_USER=$DB_USER"
+      - "MYSQL_PASSWORD=$DB_PASSWORD"
+    image: mariadb:${MARIADB_MAJOR:-10.4.5}
+    ports:
+      - 3306:3306
+  nginx:
+    container_name: ${SLUG}_nginx
+    image: nginx:1.17.0
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - ./Docker/log/:/var/log/nginx # Directory names can't be the same.
+      - ./Docker/site.conf:/etc/nginx/conf.d/site.conf
+      - ./Docker/nginx.conf:/etc/nginx/nginx.conf
+      - ./:/var/www/html
+    working_dir: /var/www/html
+  php:
+    container_name: ${SLUG}_php # Works like and ID. IT has to be unique.
+    image: filipecsweb/wordpress:php-7.4-fpm
+    restart: always
+    depends_on:
+      - mariadb
+    volumes:
+      - ./:/var/www/html
+      - ./Docker/myphp.ini:/usr/local/etc/php/conf.d/myphp.ini
+    links:
+      - nginx:${DOMAIN}
+    user: "33:33"
+  phpmyadmin:
+    container_name: ${SLUG}_phpmyadmin # Works like and ID. IT has to be unique.
+    depends_on:
+      - mariadb
+    image: phpmyadmin/phpmyadmin:4.8.5
+    ports:
+      - 8080:80
+    environment:
+      - "PMA_ARBITRARY=1"
+      - "PMA_HOST=${DB_HOST}"
+      - "PMA_USER=${DB_USER}"
+      - "PMA_PASSWORD=${DB_PASSWORD}"

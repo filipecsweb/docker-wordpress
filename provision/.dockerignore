@@ -1,0 +1,10 @@
+#D
+.git
+.idea
+__MACOSX
+Docker
+node_modules
+
+#F
+.DS_Store
+docker-compose.yaml
