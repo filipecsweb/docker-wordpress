@@ -21,6 +21,9 @@ if ( ! is_wp_error( $id ) ) {
 	update_option( 'page_on_front', $id );
 }
 
+update_option( 'timezone_string', 'America/Sao_Paulo' );
+update_option( 'time_format', 'H:i' );
+update_option( 'start_of_week', '0' );
 update_option( 'posts_per_page', 12 );
 update_option( 'posts_per_rss', 12 );
 update_option( 'default_pingback_flag', 0 );
