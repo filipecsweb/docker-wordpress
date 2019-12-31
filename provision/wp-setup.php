@@ -1,5 +1,7 @@
 <?php
-file_put_contents( __DIR__ . '/.gitignore', file_get_contents( __DIR__ . '/mygitignore' ) );
+file_put_contents( __DIR__ . '/.gitignore', file_get_contents( __DIR__ . '/docker-wordpress/provision/mygitignore/mygitignore' ) );
+file_put_contents( __DIR__ . '/config/environments/development.php', file_get_contents( __DIR__ . '/docker-wordpress/provision/config-development.php' ) );
+file_put_contents( __DIR__ . '/config/environments/production.php', file_get_contents( __DIR__ . '/docker-wordpress/provision/config-production.php' ) );
 
 wp_update_term( 1, 'category', [
 	'name' => 'SEM CATEGORIA',
