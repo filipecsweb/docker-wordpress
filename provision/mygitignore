@@ -15,6 +15,7 @@
 .htaccess
 log/*
 robots.txt
+config/environments/*
 web/app/languages/plugins/*.json
 web/app/languages/plugins/*.po
 web/app/languages/plugins/*.mo
