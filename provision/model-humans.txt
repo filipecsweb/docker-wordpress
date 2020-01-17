@@ -1,0 +1,9 @@
+/* TEAM */
+Web developer: Filipe Seabra
+Twitter: @filipecsweb
+Instagram: @filipecsweb
+From: Goiânia, Brazil
+
+/* SITE */
+Doctype: HTML5
+IDE: PhpStorm
