@@ -1,36 +1,36 @@
-const path = require('path'),
-    webpack = require('webpack'),
+const path = require('path');
+const webpack = require('webpack');
 
-    /**
-     * @link https://www.npmjs.com/package/babili-webpack-plugin
-     */
-    babiliPlugin = require('babili-webpack-plugin'),
+/**
+ * @link https://www.npmjs.com/package/babili-webpack-plugin
+ */
+const babiliPlugin = require('babili-webpack-plugin');
 
-    /**
-     * @link https://webpack.js.org/plugins/mini-css-extract-plugin/#root
-     */
-    miniCssExtractPlugin = require('mini-css-extract-plugin'),
+/**
+ * @link https://webpack.js.org/plugins/mini-css-extract-plugin/#root
+ */
+const miniCssExtractPlugin = require('mini-css-extract-plugin');
 
-    /**
-     * Usamos este módulo abaixo para remover comentários das folhas de estilo.
-     *
-     * @link https://github.com/NMFR/optimize-css-assets-webpack-plugin
-     */
-    optimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin'),
+/**
+ * Usamos este módulo abaixo para remover comentários das folhas de estilo.
+ *
+ * @link https://github.com/NMFR/optimize-css-assets-webpack-plugin
+ */
+const optimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
-    /**
-     * @link https://webpack.js.org/plugins/copy-webpack-plugin/#root
-     */
-    copyPlugin = require('copy-webpack-plugin'),
+/**
+ * @link https://webpack.js.org/plugins/copy-webpack-plugin/#root
+ */
+const copyPlugin = require('copy-webpack-plugin');
 
-    /**
-     * @link https://www.npmjs.com/package/imagemin-webpack
-     */
-    imageminPlugin = require("imagemin-webpack");
+/**
+ * @link https://www.npmjs.com/package/imagemin-webpack
+ */
+const imageminPlugin = require("imagemin-webpack");
 
 module.exports = (env, options) => {
-    let src_path = './wp-content/themes/ss/src',
-        dist_path = './wp-content/themes/ss/dist',
+    let src_path = './web/app/themes/ss/src',
+        dist_path = './web/app/themes/ss/dist',
         plugins = [];
 
     if ('production' === options.mode) {
@@ -55,6 +55,11 @@ module.exports = (env, options) => {
             test: /\.css$/
         }));
     }
+
+    plugins.push(new webpack.ProvidePlugin({
+        '$': 'jquery/dist/jquery.js',
+        'jQuery': 'jquery/dist/jquery.js'
+    }));
 
     plugins.push(new miniCssExtractPlugin({
         filename: 'bundle.css',
@@ -116,16 +121,6 @@ module.exports = (env, options) => {
                     test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
                     exclude: /node_modules/,
                     loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
-                },
-                {
-                    test: require.resolve('jquery'),
-                    use: [{
-                        loader: 'expose-loader',
-                        options: 'jQuery'
-                    }, {
-                        loader: 'expose-loader',
-                        options: '$'
-                    }]
                 }
             ]
         },
