@@ -57,8 +57,9 @@ module.exports = (env, options) => {
     }
 
     plugins.push(new webpack.ProvidePlugin({
-        '$': 'jquery/dist/jquery.js',
-        'jQuery': 'jquery/dist/jquery.js'
+        $: "jquery",
+        jQuery: "jquery",
+        "window.jQuery": "jquery"
     }));
 
     plugins.push(new miniCssExtractPlugin({
@@ -95,6 +96,9 @@ module.exports = (env, options) => {
         output: {
             filename: 'bundle.js',
             path: path.resolve(__dirname, dist_path)
+        },
+        externals: {
+            'jquery': 'jQuery' // Avoid jquery dependency being added to the bundle.
         },
         module: {
             rules: [
