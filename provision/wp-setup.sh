@@ -14,7 +14,7 @@ git clone https://github.com/filipecsweb/docker-wordpress.git ${_docker_wordpres
 
 mv ${_docker_wordpress_dir}/provision/Docker ./
 mv ${_docker_wordpress_dir}/provision/.eval-contact-form.php ./
-mv ${_docker_wordpress_dir}/provision/development-checklist.md ./
+mv ${_docker_wordpress_dir}/provision/DEVELOPMENT-CHECKLIST.md ./
 mv ${_docker_wordpress_dir}/provision/model-.dockerignore ./.dockerignore
 cp ${_docker_wordpress_dir}/provision/model-.env ./.env
 mv ${_docker_wordpress_dir}/provision/model-.env ./
