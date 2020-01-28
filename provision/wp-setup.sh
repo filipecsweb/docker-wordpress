@@ -49,13 +49,14 @@ docker exec -it "${_slug}_php" wp plugin install "http://connect.advancedcustomf
 # docker exec -it "${_slug}_php" wp theme install storefront && \
 docker exec -it "${_slug}_php" /bin/bash -c 'wp post delete $(wp post list --post_type=post --format=ids) --force'; \
 docker exec -it "${_slug}_php" /bin/bash -c 'wp post delete $(wp post list --post_type=page --format=ids) --force'; \
+docker exec -it "${_slug}_php" wp config shuffle-salts && \
 docker exec -it "${_slug}_php" wp eval-file wp-setup.php
 
 # Install dependencies.
 npm install
 
 # Theme.
-docker exec -it "${_slug}_php" wp theme delete --all --force
+docker exec -it "${_slug}_php" wp theme delete --all --force && \
 git clone https://github.com/filipecsweb/wp-theme-ss.git ${_wp_content_dir}/themes/ss && \
 docker exec -it "${_slug}_php" wp theme activate ss
 
