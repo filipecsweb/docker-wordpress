@@ -1,4 +1,6 @@
 <?php
+wp_set_sidebars_widgets( [] );
+
 // Update default category term.
 wp_update_term( 1, 'category', [
 	'name' => 'SEM CATEGORIA',
