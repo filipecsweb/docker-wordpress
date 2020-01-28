@@ -1,11 +1,11 @@
 <?php
+// Update default category term.
 wp_update_term( 1, 'category', [
 	'name' => 'SEM CATEGORIA',
 	'slug' => 'sem-categoria',
 ] );
 
-update_option( 'blogdescription', '' );
-
+// Insert Home page.
 $id = wp_insert_post( [
 	'post_author'  => 1,
 	'post_content' => '',
@@ -14,11 +14,23 @@ $id = wp_insert_post( [
 	'post_type'    => 'page',
 ], true );
 
+// Update user.
+wp_update_user( [
+	'ID'           => 1,
+	'display_name' => 'Filipe Seabra',
+	'first_name'   => 'Filipe',
+	'last_name'    => 'Seabra',
+] );
+
+update_user_meta( 1, 'wp_media_library_mode', 'list' );
+
+// Start updating options.
 if ( ! is_wp_error( $id ) ) {
 	update_option( 'show_on_front', 'page' );
 	update_option( 'page_on_front', $id );
 }
 
+update_option( 'blogdescription', '' );
 update_option( 'timezone_string', 'America/Sao_Paulo' );
 update_option( 'time_format', 'H:i' );
 update_option( 'start_of_week', '0' );

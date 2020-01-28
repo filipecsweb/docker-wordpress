@@ -37,6 +37,7 @@ docker exec -it "${_slug}_php" wp core install --url=${_url} --title=Title --adm
 docker exec -it "${_slug}_php" wp rewrite flush && \
 # docker exec -it "${_slug}_php" wp language core install ${_locale} && \
 # docker exec -it "${_slug}_php" wp site switch-language ${_locale} && \
+docker exec -it "${_slug}_php" wp plugin uninstall hello akismet --deactivate && \
 docker exec -it "${_slug}_php" wp plugin install wordpress-importer && \
 docker exec -it "${_slug}_php" wp plugin install adminimize --activate && \
 docker exec -it "${_slug}_php" wp plugin install wp-sweep --activate && \
@@ -54,6 +55,7 @@ docker exec -it "${_slug}_php" wp eval-file wp-setup.php
 npm install
 
 # Theme.
+docker exec -it "${_slug}_php" wp theme delete --all --force
 git clone https://github.com/filipecsweb/wp-theme-ss.git ${_wp_content_dir}/themes/ss && \
 docker exec -it "${_slug}_php" wp theme activate ss
 
