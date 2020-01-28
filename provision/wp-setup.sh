@@ -60,8 +60,6 @@ git clone https://github.com/filipecsweb/wp-theme-ss.git ${_wp_content_dir}/them
 docker exec -it "${_slug}_php" wp theme activate ss
 
 # Removals.
-find ./web/wp/wp-content/themes/* -not -name "index.php" -exec rm -rf {} \; # Bedrock related.
-find ./web/wp/wp-content/plugins/* -not -name "index.php" -exec rm -rf {} \; # Bedrock related.
 find ${_wp_content_dir} -name '.git*' -exec rm -rf {} \;
 rm -rf ${_docker_wordpress_dir} .github .env.example CHANGELOG.md LICENSE.md phpcs.xml wp-setup.php
 
