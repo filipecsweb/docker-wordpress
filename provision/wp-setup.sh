@@ -45,6 +45,8 @@ docker exec -it "${_slug}_php" wp plugin install acf-sidebar-selector-field --ac
 docker exec -it "${_slug}_php" wp plugin install contact-form-7 --activate && \
 docker exec -it "${_slug}_php" wp plugin install user-role-editor --activate && \
 docker exec -it "${_slug}_php" wp plugin install seo-by-rank-math --activate && \
+docker exec -it "${_slug}_php" wp plugin install google-site-kit && \
+docker exec -it "${_slug}_php" wp plugin install native-lazyload && \
 docker exec -it "${_slug}_php" wp plugin install "http://connect.advancedcustomfields.com/index.php?p=pro&a=download&k=b3JkZXJfaWQ9ODIwNDF8dHlwZT1kZXZlbG9wZXJ8ZGF0ZT0yMDE2LTA1LTIxIDAyOjUxOjUy" --activate && \
 # docker exec -it "${_slug}_php" wp theme install storefront && \
 docker exec -it "${_slug}_php" /bin/bash -c 'wp post delete $(wp post list --post_type=post --format=ids) --force'; \
