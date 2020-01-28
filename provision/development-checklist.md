@@ -37,13 +37,13 @@
 - [x] Renomeia categoria padrao e deleta conteudo inutil: temas, posts e comentários.
 - [x] Acessa Configurações e seus subitens e define opções convenientes ao site.
 - [x] Ativa o tema.
+- [ ] Cria o menu principal.
 - [ ] [Atualiza paleta de cores](https://gist.github.com/filipecsweb/71245fd0312882c57c90a960c7f68d2a).
 - [ ] [Cria projeto em Icomoon](https://icomoon.io/app).
 - [ ] Insere logo e favicon.
 - [ ] Importa grupos de campos do ACF e customiza se necessário.
 - [ ] Cria todas as páginas.
 - [ ] Inicia desenvolvimento: `npm run watch`.
-- [ ] Constrói cabeçalho e rodapé.
 
 ## Lançamento
 

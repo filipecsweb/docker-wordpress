@@ -63,8 +63,7 @@ module.exports = (env, options) => {
     }));
 
     plugins.push(new miniCssExtractPlugin({
-        filename: 'bundle.css',
-        chunkFilename: '[id].css'
+        filename: '[name].css'
     }));
 
     plugins.push(new copyPlugin([
@@ -91,14 +90,13 @@ module.exports = (env, options) => {
 
     return {
         entry: {
-            app: src_path + '/js/app.js'
+            bundle: src_path + '/js/bundle.js',
+            'bundle-admin': src_path + '/js/bundle-admin.js',
+            'bundle-login-page': src_path + '/js/bundle-login-page.js'
         },
         output: {
-            filename: 'bundle.js',
+            filename: '[name].js',
             path: path.resolve(__dirname, dist_path)
-        },
-        externals: {
-            'jquery': 'jQuery' // Avoid jquery dependency being added to the bundle.
         },
         module: {
             rules: [
@@ -117,7 +115,20 @@ module.exports = (env, options) => {
                     exclude: /node_modules/,
                     use: [
                         miniCssExtractPlugin.loader,
-                        'css-loader?sourceMap',
+                        {
+                            loader: 'css-loader',
+                            options: {sourceMap: true}
+                        },
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                ident: 'postcss',
+                                sourceMap: 'inline',
+                                plugins: [
+                                    require('autoprefixer')
+                                ]
+                            }
+                        },
                         'sass-loader'
                     ]
                 },
@@ -125,10 +136,18 @@ module.exports = (env, options) => {
                     test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
                     exclude: /node_modules/,
                     loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
+                },
+                {
+                    test: /\.(png|jpe?g|gif|svg)/i,
+                    exclude: /node_modules/,
+                    loader: 'url-loader'
                 }
             ]
         },
         plugins: plugins,
+        externals: {
+            'jquery': 'jQuery' // Avoid jquery dependency being added to the bundle.
+        },
         watchOptions: {
             ignored: /node_modules/
         }

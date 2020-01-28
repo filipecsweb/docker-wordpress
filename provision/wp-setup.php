@@ -1,7 +1,4 @@
 <?php
-file_put_contents( __DIR__ . '/config/environments/development.php', file_get_contents( __DIR__ . '/docker-wordpress/provision/model-config-development.php' ) );
-file_put_contents( __DIR__ . '/config/environments/production.php', file_get_contents( __DIR__ . '/docker-wordpress/provision/model-config-production.php' ) );
-
 wp_update_term( 1, 'category', [
 	'name' => 'SEM CATEGORIA',
 	'slug' => 'sem-categoria',
@@ -37,4 +34,3 @@ update_option( 'large_size_w', 1024 );
 update_option( 'large_size_h', 1024 );
 update_option( 'category_base', 'categoria' );
 update_option( 'tag_base', 'tag' );
-
