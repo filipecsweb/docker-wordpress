@@ -6,7 +6,7 @@ read -p "Enter admin password: " _admin_password
 _domain=localhost.${_slug}
 _url=http://${_domain}
 _docker_wordpress_dir=./docker-wordpress
-_wp_content_dir=./web/app
+_wp_content_dir=./wp-content
 _locale=pt_BR
 
 # Environment setup.
@@ -30,26 +30,9 @@ sed -i '' -e "s/\$_SLUG/${_slug}/g" ./.env
 sed -i '' -e "s/\$_SLUG/${_slug}/g" ./Docker/site.conf
 sed -i '' -e "s/\$_SLUG/${_slug}/g" ./package.json
 
-echo '# Docker' > ./.env
-echo "SLUG=${_slug}" >> ./.env
-echo "DOMAIN=${_domain}" >> ./.env
-
-echo "" >> ./.env
-echo "# WordPress" >> ./.env
-echo "DB_NAME=wp_${_slug}" >> ./.env
-echo "DB_USER=${_slug}" >> ./.env
-echo "DB_PASSWORD=victory" >> ./.env
-echo "DB_HOST=${_slug}_mariadb" >> ./.env
-echo "" >> ./.env
-echo "WP_ENV=development" >> ./.env
-echo "WP_DOMAIN=${_domain}" >> ./.env
-echo 'WP_STATIC_HOME=http://s.${WP_DOMAIN}' >> ./.env
-echo 'WP_HOME=http://${WP_DOMAIN}' >> ./.env
-echo 'WP_SITEURL=${WP_HOME}/wp' >> ./.env
-
 # WordPress setup.
 docker stop $(docker ps -q); docker-compose up -d --force-recreate && \
-docker exec -it "${_slug}_php" wp core download --force --skip-content --locale=${_locale} && \
+docker exec -it "${_slug}_php" wp core download --force --locale=${_locale} && \
 docker exec -it "${_slug}_php" wp core install --url=${_url} --title=Title --admin_user=filipe --admin_password=${_admin_password} --admin_email=filipecseabra@gmail.com --skip-email && \
 docker exec -it "${_slug}_php" wp rewrite flush && \
 # docker exec -it "${_slug}_php" wp language core install ${_locale} && \

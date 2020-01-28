@@ -29,8 +29,8 @@ const copyPlugin = require('copy-webpack-plugin');
 const imageminPlugin = require("imagemin-webpack");
 
 module.exports = (env, options) => {
-    let src_path = './web/app/themes/ss/src',
-        dist_path = './web/app/themes/ss/dist',
+    let src_path = './wp-content/themes/ss/src',
+        dist_path = './wp-content/themes/ss/dist',
         plugins = [];
 
     if ('production' === options.mode) {
