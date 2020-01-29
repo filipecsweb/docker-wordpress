@@ -35,8 +35,8 @@ docker stop $(docker ps -q); docker-compose up -d --force-recreate && \
 docker exec -it "${_slug}_php" wp core download --force --locale=${_locale} && \
 docker exec -it "${_slug}_php" wp core install --url=${_url} --title=Title --admin_user=filipe --admin_password=${_admin_password} --admin_email=filipecseabra@gmail.com --skip-email && \
 docker exec -it "${_slug}_php" wp rewrite flush && \
-# docker exec -it "${_slug}_php" wp language core install ${_locale} && \
-# docker exec -it "${_slug}_php" wp site switch-language ${_locale} && \
+docker exec -it "${_slug}_php" wp language core install ${_locale} && \
+docker exec -it "${_slug}_php" wp site switch-language ${_locale} && \
 docker exec -it "${_slug}_php" wp plugin uninstall hello akismet --deactivate && \
 docker exec -it "${_slug}_php" wp plugin install wordpress-importer && \
 docker exec -it "${_slug}_php" wp plugin install adminimize --activate && \
