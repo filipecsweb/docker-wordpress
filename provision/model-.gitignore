@@ -15,10 +15,9 @@
 .htaccess
 log/*
 robots.txt
-config/environments/*
-web/app/languages/plugins/*.json
-web/app/languages/plugins/*.po
-web/app/languages/plugins/*.mo
+wp-content/languages/plugins/*.json
+wp-content/languages/plugins/*.po
+wp-content/languages/plugins/*.mo
 wp-cli.local.yml
 
 #D
@@ -26,6 +25,6 @@ wp-cli.local.yml
 __MACOSX/
 .idea/
 node_modules/
-web/app/cache/
-web/app/upgrade/
-web/app/uploads/
+wp-content/cache/
+wp-content/upgrade/
+wp-content/uploads/
