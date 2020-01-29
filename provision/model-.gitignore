@@ -3,6 +3,7 @@
 /*.sh
 /Bing*
 /google*
+/wp-config.php
 *.cache
 *.log
 *.psd
