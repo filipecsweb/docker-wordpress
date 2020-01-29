@@ -48,3 +48,4 @@ update_option( 'large_size_w', 1024 );
 update_option( 'large_size_h', 1024 );
 update_option( 'category_base', 'categoria' );
 update_option( 'tag_base', 'tag' );
+update_option( 'permalink_structure	', '/%year%/%monthnum%/%day%/%postname%/' );
