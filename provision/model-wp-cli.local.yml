@@ -1,0 +1,5 @@
+apache_modules:
+   - mod_rewrite
+
+@prod:
+   ssh: user@IP/var/www/html

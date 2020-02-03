@@ -16,6 +16,8 @@ $id = wp_insert_post( [
 	'post_type'    => 'page',
 ], true );
 
+update_post_meta( $id, '_wp_page_template', 'template-home.php' );
+
 // Update user.
 wp_update_user( [
 	'ID'           => 1,
@@ -49,3 +51,11 @@ update_option( 'large_size_h', 1024 );
 update_option( 'category_base', 'categoria' );
 update_option( 'tag_base', 'tag' );
 update_option( 'permalink_structure	', '/%year%/%monthnum%/%day%/%postname%/' );
+
+$user_role_editor = get_option( 'user_role_editor' );
+
+if ( isset( $user_role_editor['show_admin_role'] ) ) {
+	$user_role_editor['show_admin_role'] = '1';
+
+	update_option( 'user_role_editor', $user_role_editor );
+}

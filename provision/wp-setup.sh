@@ -22,7 +22,9 @@ mv ${_docker_wordpress_dir}/provision/model-.gitignore ./.gitignore
 mv ${_docker_wordpress_dir}/provision/model-docker-compose.yaml ./docker-compose.yaml
 mv ${_docker_wordpress_dir}/provision/model-humans.txt ./humans.txt
 mv ${_docker_wordpress_dir}/provision/model-package.json ./package.json
+mv ${_docker_wordpress_dir}/provision/model-sh-get-db-from-prod.sh ./sh-get-db-from-prod.sh
 mv ${_docker_wordpress_dir}/provision/model-webpack.config.js ./webpack.config.js
+mv ${_docker_wordpress_dir}/provision/model-wp-cli.local.yml ./wp-cli.local.yml
 cp ${_docker_wordpress_dir}/provision/model-wp-config.php ./wp-config.php
 mv ${_docker_wordpress_dir}/provision/model-wp-config.php ./
 mv ${_docker_wordpress_dir}/provision/wp-setup.php ./ # Will be removed.
