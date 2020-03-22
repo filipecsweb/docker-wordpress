@@ -14,10 +14,11 @@ define( 'DB_COLLATE', '' );
 define( 'WP_STATIC_HOME', "http://s.{$_ENV['WP_DOMAIN']}" ); # NON-native.
 define( 'WP_HOME', "http://{$_ENV['WP_DOMAIN']}" );
 define( 'WP_SITEURL', WP_HOME );
-define( 'COOKIE_DOMAIN', $_ENV['WP_DOMAIN'] );
+
+//define( 'COOKIE_DOMAIN', $_ENV['WP_DOMAIN'] );
 
 //if ( strpos( ( $_SERVER['REQUEST_URI'] ?? '' ), '/wp-' ) === false && strpos( ( $_SERVER['REQUEST_URI'] ?? '' ), '.xml' ) === false ) {
-//	define( 'WP_CONTENT_URL', $_ENV['WP_STATIC_HOME'] . '/wp-content' );
+//	define( 'WP_CONTENT_URL', WP_STATIC_HOME . '/wp-content' );
 //}
 
 define( 'WP_LOCAL_DEV', true );
