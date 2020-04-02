@@ -1,33 +1,4 @@
-<style>
-    .form-wrapper label {
-        font-size: 1rem;
-        margin-bottom: .25rem;
-        width: 100%;
-    }
-
-    .form-wrapper label > b {
-        color: red;
-        display: inline;
-        font-size: 1rem;
-        line-height: 1;
-        vertical-align: top;
-    }
-
-    .form-wrapper ~ .wpcf7-response-output {
-        margin: 1.5rem 0 0 0;
-        text-transform: uppercase;
-        transition: none !important;
-    }
-
-    .form-wrapper ~ .wpcf7-response-output.wpcf7-validation-errors {
-        border: 1px solid red;
-    }
-
-    .form-wrapper ~ .wpcf7-response-output.wpcf7-mail-sent-ok {
-        border: 1px solid #398f14;
-    }
-</style>
-<div class="form-wrapper">
+<div class="form-wrapper layout-default">
     <p class="lead">Envie-nos uma mensagem através do formulário abaixo.</p>
     <div class="form-group">
         <label for="input-your-name">Seu nome <b>*</b></label>

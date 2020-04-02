@@ -13,7 +13,7 @@ _locale=pt_BR
 git clone https://github.com/filipecsweb/docker-wordpress.git ${_docker_wordpress_dir} # Will be removed.
 
 mv ${_docker_wordpress_dir}/provision/Docker ./
-mv ${_docker_wordpress_dir}/provision/.eval-contact-form.php ./
+mv ${_docker_wordpress_dir}/provision/model-cf7-form.php ./
 mv ${_docker_wordpress_dir}/provision/DEVELOPMENT-CHECKLIST.md ./
 mv ${_docker_wordpress_dir}/provision/model-.dockerignore ./.dockerignore
 cp ${_docker_wordpress_dir}/provision/model-.env ./.env
