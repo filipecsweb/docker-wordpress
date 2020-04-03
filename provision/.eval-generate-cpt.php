@@ -12,6 +12,10 @@
  * template archive/template-cpt.
  * template single/template-cpt.
  * partial loop/cpt/layout-default.
+ *
+ * After generating:
+ * 1. Set post type arguments.
+ * 2. Set @see SS_TEMPLATE arguments.
  */
 
 $args = $args ?? [];
@@ -37,6 +41,7 @@ $cpt_dir             = STYLESHEETPATH . '/app/cpt';
 $controllers_dir     = STYLESHEETPATH . '/app/Controllers';
 $loop_dir            = STYLESHEETPATH . '/partials/loop';
 $templates_parts_dir = STYLESHEETPATH . '/template-parts';
+$scss_dir            = STYLESHEETPATH . '/src/scss';
 $cpt_model           = "$cpt_dir/.model.php";
 
 copy( $cpt_model, "$cpt_dir/$slug.php" );
@@ -71,6 +76,25 @@ if ( in_array( 'loop', $args ) ) {
 	}
 
 	file_put_contents( "$loop_dir/$slug/layout-default.php", $custom );
+
+	$content = file_get_contents( "$scss_dir/theme/_loop.scss" );
+
+	if ( strpos( $content, "# $slug" ) === false ) {
+		ob_start();
+
+		echo PHP_EOL . "/*--------------------------------------------------------------";
+		echo PHP_EOL . "# $slug";
+		echo PHP_EOL . "--------------------------------------------------------------*/";
+
+		echo PHP_EOL . "article[class^=\"$slug-\"] {";
+		echo PHP_EOL . "\tposition: relative;";
+		echo PHP_EOL . "}";
+		echo PHP_EOL;
+
+		$data = ob_get_clean();
+
+		file_put_contents( "$scss_dir/theme/_loop.scss", $data, FILE_APPEND );
+	}
 }
 
 if ( in_array( 'single', $args ) ) {
