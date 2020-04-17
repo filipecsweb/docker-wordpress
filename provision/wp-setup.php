@@ -18,6 +18,11 @@ $id = wp_insert_post( [
 
 update_post_meta( $id, '_wp_page_template', 'template-home.php' );
 
+if ( function_exists( 'update_field' ) ) {
+	update_field( 'is_full_width', '1', $id );
+	update_field( 'show_breadcrumbs', '0', $id );
+}
+
 // Update user.
 wp_update_user( [
 	'ID'           => 1,
