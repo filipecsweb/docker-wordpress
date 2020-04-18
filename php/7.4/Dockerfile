@@ -60,7 +60,7 @@ RUN { \
 	} > /usr/local/etc/php/conf.d/opcache-recommended.ini
 
 # Install extensions to work with https://github.com/spatie/image-optimizer
-RUN apt-get update;
+RUN apt-get update; \
     apt-get install jpegoptim -y; \
     apt-get install optipng -y; \
     apt-get install pngquant -y; \
