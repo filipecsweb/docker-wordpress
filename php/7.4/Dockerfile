@@ -65,7 +65,7 @@ RUN apt-get update; \
     apt-get install optipng -y; \
     apt-get install pngquant -y; \
     apt-get install gifsicle -y; \
-    apt-get install webp -y
+    apt-get install webp -y;
 
 # Install WP-CLI
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar; \
