@@ -21,11 +21,6 @@ RUN set -ex; \
 		libmagickwand-dev \
 		libpng-dev \
 		libzip-dev \
-		jpegoptim \
-        optipng \
-        pngquant \
-        gifsicle \
-        webp \
 	; \
 	\
 	docker-php-ext-configure gd --with-freetype --with-jpeg; \
@@ -63,6 +58,14 @@ RUN { \
 		echo 'opcache.revalidate_freq=2'; \
 		echo 'opcache.fast_shutdown=1'; \
 	} > /usr/local/etc/php/conf.d/opcache-recommended.ini
+
+# Install extensions to work with https://github.com/spatie/image-optimizer
+RUN apt-get update;
+    apt-get install jpegoptim -y; \
+    apt-get install optipng -y; \
+    apt-get install pngquant -y; \
+    apt-get install gifsicle -y; \
+    apt-get install webp -y
 
 # Install WP-CLI
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar; \
