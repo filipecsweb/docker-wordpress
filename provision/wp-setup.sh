@@ -61,6 +61,10 @@ docker exec -it "${_slug}_php" /bin/bash -c 'wp post delete $(wp post list --pos
 docker exec -it "${_slug}_php" wp config shuffle-salts && \
 docker exec -it "${_slug}_php" wp eval-file wp-setup.php && \
 
+# After WordPress setup.
+git clone https://github.com/filipecsweb/wp-media-compression.git ./wp-content/plugins/wp-media-compression; \
+mv ${_docker_wordpress_dir}/provision/mu-plugins ./wp-content/; \
+
 # Install dependencies.
 npm install && \
 

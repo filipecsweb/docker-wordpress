@@ -29,5 +29,6 @@ __MACOSX/
 .idea/
 node_modules/
 wp-content/cache/
+wp-content/plugins/worker/
 wp-content/upgrade/
 wp-content/uploads/
