@@ -49,7 +49,8 @@ docker exec -it "${_slug}_php" wp plugin install wp-sweep --activate && \
 docker exec -it "${_slug}_php" wp plugin install acf-sidebar-selector-field --activate && \
 docker exec -it "${_slug}_php" wp plugin install contact-form-7 --activate && \
 docker exec -it "${_slug}_php" wp plugin install user-role-editor --activate && \
-docker exec -it "${_slug}_php" wp plugin install seo-by-rank-math --activate && \
+docker exec -it "${_slug}_php" wp plugin install seo-by-rank-math && \
+docker exec -it "${_slug}_php" wp plugin install wordpress-seo && \
 docker exec -it "${_slug}_php" wp plugin install google-site-kit && \
 docker exec -it "${_slug}_php" wp plugin install native-lazyload && \
 docker exec -it "${_slug}_php" wp plugin install wordpress-popular-posts && \
