@@ -13,7 +13,7 @@ if ( defined( 'WP_LOCAL_DEV' ) ) {
 	if ( WP_LOCAL_DEV ) {
 		$plugins = [
 			'google-site-kit/google-site-kit.php',
-			'ss-smtp/ss-smtp.php',
+			'ss-smtp/smtp.php',
 			'worker/init.php',
 			'wp-super-cache/wp-cache.php',
 		];
