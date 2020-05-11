@@ -38,6 +38,7 @@ sed -i '' -e "s/\$_SLUG/${_slug}/g" ./package.json && \
 # WordPress setup.
 docker stop $(docker ps -q); docker-compose up -d --force-recreate && \
 docker exec -it "${_slug}_php" wp core download --force --locale=${_locale} && \
+sleep 5 && \
 docker exec -it "${_slug}_php" wp core install --url=${_url} --title=Title --admin_user=filipe --admin_password=${_admin_password} --admin_email=filipecseabra@gmail.com --skip-email && \
 docker exec -it "${_slug}_php" wp rewrite flush && \
 docker exec -it "${_slug}_php" wp language core install ${_locale} && \
