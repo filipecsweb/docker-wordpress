@@ -47,20 +47,17 @@ update_option( 'posts_per_page', 12 );
 update_option( 'posts_per_rss', 12 );
 update_option( 'default_pingback_flag', 0 );
 update_option( 'default_ping_status', 0 );
-update_option( 'thumbnail_size_w', 125 );
-update_option( 'thumbnail_size_h', 125 );
-update_option( 'medium_size_w', 375 );
-update_option( 'medium_size_h', 375 );
-update_option( 'large_size_w', 1024 );
-update_option( 'large_size_h', 1024 );
+update_option( 'thumbnail_size_w', 100 );
+update_option( 'thumbnail_size_h', 100 );
+update_option( 'medium_size_w', 400 );
+update_option( 'medium_size_h', 400 );
+update_option( 'large_size_w', 960 );
+update_option( 'large_size_h', 960 );
 update_option( 'category_base', 'categoria' );
 update_option( 'tag_base', 'tag' );
-update_option( 'permalink_structure	', '/%year%/%monthnum%/%day%/%postname%/' );
+update_option( 'permalink_structure	', '/%postname%/' );
 
-$user_role_editor = get_option( 'user_role_editor' );
+$user_role_editor                    = get_option( 'user_role_editor' );
+$user_role_editor['show_admin_role'] = '1';
 
-if ( isset( $user_role_editor['show_admin_role'] ) ) {
-	$user_role_editor['show_admin_role'] = '1';
-
-	update_option( 'user_role_editor', $user_role_editor );
-}
+update_option( 'user_role_editor', $user_role_editor );
