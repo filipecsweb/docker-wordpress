@@ -27,8 +27,9 @@ define( 'WP_DEBUG_DISPLAY', true );
 define( 'WP_DEBUG_LOG', true );
 define( 'FORCE_SSL_ADMIN', false );
 
+define( 'WP_POST_REVISIONS', 20 );
 define( 'EMPTY_TRASH_DAYS', 0 );
-define( 'AUTOSAVE_INTERVAL', 30 );
+define( 'AUTOSAVE_INTERVAL', 60 );
 define( 'IMAGE_EDIT_OVERWRITE', true );
 define( 'DISALLOW_FILE_EDIT', true );
 define( 'DISALLOW_FILE_MODS', false );
@@ -56,8 +57,8 @@ define( 'NONCE_SALT', '|RwHMZ1lPWl8QuDTGqBy*c1^G 1J*J={q|f9LCKms=%YM%2D@]BNdIuk[
 define( 'WPCF7_AUTOP', false );
 define( 'WPCF7_ADMIN_READ_CAPABILITY', 'update_core' );
 define( 'WPCF7_ADMIN_READ_WRITE_CAPABILITY', 'update_core' );
-//define( 'WPCF7_LOAD_JS', false );
-//define( 'WPCF7_LOAD_CSS', false );
+define( 'WPCF7_LOAD_JS', false );
+define( 'WPCF7_LOAD_CSS', false );
 
 $table_prefix = 'wp_';
 
