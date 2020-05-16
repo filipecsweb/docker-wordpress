@@ -8,7 +8,7 @@ wp_update_term( 1, 'category', [
 ] );
 
 // Insert Home page.
-$id = wp_insert_post( [
+$home_page_id = wp_insert_post( [
 	'post_author'  => 1,
 	'post_content' => '',
 	'post_title'   => 'Home',
@@ -34,9 +34,9 @@ wp_update_user( [
 update_user_meta( 1, 'wp_media_library_mode', 'list' );
 
 // Start updating options.
-if ( ! is_wp_error( $id ) ) {
+if ( ! is_wp_error( $home_page_id ) ) {
 	update_option( 'show_on_front', 'page' );
-	update_option( 'page_on_front', $id );
+	update_option( 'page_on_front', $home_page_id );
 }
 
 update_option( 'blogdescription', '' );
@@ -57,7 +57,24 @@ update_option( 'category_base', 'categoria' );
 update_option( 'tag_base', 'tag' );
 update_option( 'permalink_structure	', '/%postname%/' );
 
-$user_role_editor                    = get_option( 'user_role_editor' );
+// Create menu.
+$menu_id = wp_create_nav_menu( 'Menu principal' );
+
+if ( ! is_wp_error( $menu_id ) ) {
+	wp_update_nav_menu_item( $menu_id, 0, [
+		'menu-item-title'   => 'Home',
+		'menu-item-classes' => '',
+		'menu-item-url'     => home_url( '/' ),
+		'menu-item-status'  => 'publish'
+	] );
+
+	set_theme_mod( 'nav_menu_locations', [
+		'primary-menu' => $menu_id,
+	] );
+}
+
+// Update plugin URE.
+$user_role_editor                    = (array) get_option( 'user_role_editor' );
 $user_role_editor['show_admin_role'] = '1';
 
 update_option( 'user_role_editor', $user_role_editor );
