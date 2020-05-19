@@ -53,7 +53,6 @@ docker exec -it "${_slug}_php" wp plugin install user-role-editor --activate && 
 docker exec -it "${_slug}_php" wp plugin install seo-by-rank-math && \
 docker exec -it "${_slug}_php" wp plugin install wordpress-seo && \
 docker exec -it "${_slug}_php" wp plugin install google-site-kit && \
-docker exec -it "${_slug}_php" wp plugin install native-lazyload && \
 docker exec -it "${_slug}_php" wp plugin install wordpress-popular-posts && \
 docker exec -it "${_slug}_php" wp plugin install recent-posts-widget-with-thumbnails && \
 docker exec -it "${_slug}_php" wp plugin install "http://connect.advancedcustomfields.com/index.php?p=pro&a=download&k=b3JkZXJfaWQ9ODIwNDF8dHlwZT1kZXZlbG9wZXJ8ZGF0ZT0yMDE2LTA1LTIxIDAyOjUxOjUy" --activate && \
