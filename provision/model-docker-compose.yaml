@@ -39,7 +39,7 @@ services:
       - ./Docker/myphp.ini:/usr/local/etc/php/conf.d/myphp.ini
     links:
       - nginx:${DOMAIN}
-    user: "33:33"
+    user: "1000:1000" # Replace these IDs with your sysuser ID.
   phpmyadmin:
     container_name: ${SLUG}_phpmyadmin # Works like and ID. IT has to be unique.
     depends_on:
