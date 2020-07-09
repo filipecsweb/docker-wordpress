@@ -11,6 +11,7 @@ _locale=pt_BR
 # Will be removed.
 git clone https://github.com/filipecsweb/docker-wordpress.git ${_docker_wordpress_dir}
 
+mv ${_docker_wordpress_dir}/provision/.snippets ./
 mv ${_docker_wordpress_dir}/provision/Docker ./
 mv ${_docker_wordpress_dir}/provision/.eval-generate-cpt.php ./
 mv ${_docker_wordpress_dir}/provision/model-cf7-form.php ./
@@ -40,11 +41,11 @@ docker exec -it "${_slug}_php" wp rewrite flush
 docker exec -it "${_slug}_php" wp language core install ${_locale}
 docker exec -it "${_slug}_php" wp site switch-language ${_locale}
 docker exec -it "${_slug}_php" wp plugin uninstall hello akismet --deactivate
-docker exec -it "${_slug}_php" wp plugin install wordpress-importer
+docker exec -it "${_slug}_php" wp plugin install query-monitor --activate
 docker exec -it "${_slug}_php" wp plugin install adminimize
 docker exec -it "${_slug}_php" wp plugin install wp-sweep --activate
 docker exec -it "${_slug}_php" wp plugin install acf-sidebar-selector-field --activate
-docker exec -it "${_slug}_php" wp plugin install contact-form-7 --activate
+docker exec -it "${_slug}_php" wp plugin install contact-form-7
 docker exec -it "${_slug}_php" wp plugin install user-role-editor --activate
 docker exec -it "${_slug}_php" wp plugin install seo-by-rank-math
 docker exec -it "${_slug}_php" wp plugin install wordpress-seo

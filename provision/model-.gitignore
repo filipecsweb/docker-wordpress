@@ -1,6 +1,9 @@
+/.*
+!/.gitignore
+
 #F
-/.eval-*
 /*.sh
+/ads.txt
 /Bing*
 /google*
 /loaderio-*
@@ -13,23 +16,18 @@
 *.sql
 *.zip
 .DS_Store
-.env
-.htaccess
 log/*
 robots.txt
 wp-content/advanced-cache.php
 wp-content/wp-cache-config.php
-wp-content/languages/plugins/*.json
-wp-content/languages/plugins/*.po
-wp-content/languages/plugins/*.mo
 wp-cli.local.yml
 
 #D
 /vendor
 __MACOSX/
-.idea/
 node_modules/
 wp-content/cache/
+wp-content/languages/
 wp-content/plugins/query-monitor/
 wp-content/plugins/worker/
 wp-content/upgrade/
