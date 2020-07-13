@@ -52,3 +52,10 @@ services:
       - "PMA_HOST=${DB_HOST}"
       - "PMA_USER=${DB_USER}"
       - "PMA_PASSWORD=${DB_PASSWORD}"
+  mailhog:
+    container_name: ${SLUG}_mailhog
+    image: mailhog/mailhog:latest
+    restart: always
+    ports:
+      - 1025:1025
+      - 8025:8025
