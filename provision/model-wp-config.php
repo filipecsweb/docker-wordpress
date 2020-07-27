@@ -21,7 +21,6 @@ define( 'WP_SITEURL', WP_HOME );
 //	define( 'WP_CONTENT_URL', WP_STATIC_HOME . '/wp-content' );
 //}
 
-define( 'FS_METHOD', true ); // Only on dev env.
 define( 'WP_LOCAL_DEV', true );
 define( 'WP_DEBUG', true );
 define( 'WP_DEBUG_DISPLAY', true );
