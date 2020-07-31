@@ -12,17 +12,16 @@
     <div class="form-group">
         <label for="input-your-subject">Assunto <b>*</b></label>
         [select* your-subject id:input-your-subject class:custom-select include_blank "Reportar Erro" "Dúvidas e Reclamações" "Elogios" "Outros"]
-        <small class="form-text text-muted">Sobre qual assunto você quer falar?</small>
     </div>
     <div class="form-group">
         <label for="input-your-phone">Telefone (opcional)</label>
         [text your-phone class:form-control class:js-phone-pt_BR id:input-your-phone]
-        <small class="form-text text-muted lh-1">Insira seu número para permitir a resposta por ligação.</small>
+        <small class="form-text text-muted">Você pode receber uma resposta nesse número.</small>
     </div>
     <div class="form-group">
         <label for="input-your-file">Anexo (opcional)</label>
         [file your-file limit:6291456 filetypes:jpg|jpeg|pdf|png|webp|gif id:input-your-file class:file]
-        <small class="form-text text-muted">Quer enviar alguma imagem para ilustrar o que você quer dizer?</small>
+        <small class="form-text text-muted">Quer enviar alguma imagem para ilustrar sua mensagem?</small>
     </div>
     <div class="form-group">
         <label for="input-your-message">Mensagem <b>*</b></label>
