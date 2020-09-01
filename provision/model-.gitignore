@@ -7,10 +7,11 @@
 /Bing*
 /google*
 /loaderio-*
+/license.txt
+/readme.html
 /wp-config.php
 *.cache
 *.log
-*.psd
 *.tar.gz
 *.tgz
 *.sql
@@ -19,12 +20,13 @@
 log/*
 robots.txt
 wp-content/advanced-cache.php
+wp-content/db.php
 wp-content/mu-plugins/0-worker.php
+wp-content/mu-plugins/purge.php
 wp-content/wp-cache-config.php
 wp-cli.local.yml
 
 #D
-/vendor
 __MACOSX/
 node_modules/
 wp-content/cache/
@@ -33,3 +35,5 @@ wp-content/plugins/query-monitor/
 wp-content/plugins/worker/
 wp-content/upgrade/
 wp-content/uploads/
+
+# Custom
