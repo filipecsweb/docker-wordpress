@@ -49,10 +49,64 @@ sed -i "s/# server_tokens off/server_tokens off/" /etc/nginx/nginx.conf
 
 curl --silent --location https://deb.nodesource.com/setup_12.x | bash -; apt-get update; apt-get install -y nodejs;
 
-apt-get update; apt upgrade -y; apt-get install -y mariadb-server mariadb-client;
+# Install WP-CLI
+curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+chmod +x wp-cli.phar
+mv wp-cli.phar /usr/local/bin/wp
+
+# Install libraries for image optimization
+apt-get update -y
+apt-get install jpegoptim -y
+apt-get install optipng -y
+apt-get install pngquant -y
+apt-get install gifsicle -y
+apt-get install webp -y
 
 apt autoremove -y;
+
+# Install Apache
+apt update -y && apt install apache2 -y && apt autoremove -y \
+&& cd /tmp \
+&& a2dissite 000-default.conf \
+&& wget https://mirrors.edge.kernel.org/ubuntu/pool/multiverse/liba/libapache-mod-fastcgi/libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb \
+&& dpkg -i libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb \
+&& systemctl reload apache2 \
+&& echo -en '<IfModule mod_fastcgi.c>\nAddHandler fastcgi-script .fcgi\n#FastCgiWrapper /usr/lib/apache2/suexec\nFastCgiIpcDir /var/lib/apache2/fastcgi\n</IfModule>' > /etc/apache2/mods-enabled/fastcgi.conf \
+&& echo 'Listen 8080' > /etc/apache2/ports.conf \
+&& systemctl reload apache2 \
+&& apt update && apt install -y libapache2-mod-php libapache2-mod-fcgid \
+&& a2enmod actions fcgid proxy proxy_fcgi proxy_http fastcgi alias rewrite \
+&& systemctl restart apache2
+
+# Install Certbot
+add-apt-repository ppa:certbot/certbot;
+apt install -y python-certbot-nginx;
+
+# Setup ufw
+ufw reset; \
+ufw allow 22/tcp; \
+ufw allow 80/tcp; \
+ufw allow 443/tcp; \
+ufw enable;
+
+# Install ionCube
+cd /tmp \
+&& wget https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz \
+&& tar xzf ioncube_loaders_lin_x86-64.tar.gz \
+&& php -i | grep extension_dir
+
+cp ioncube/ioncube_loader_lin_7.4.so /usr/lib/php/20190902/ \
+&& rm -rf ioncube* \
+&& cd /etc/php/7.4 \
+&& echo 'zend_extension=ioncube_loader_lin_7.4.so' > fpm/conf.d/00-ioncube-loader.ini \
+&& cp fpm/conf.d/00-ioncube-loader.ini cli/conf.d/ \
+&& systemctl restart php7.4-fpm
+
+# Install MariaDB
+apt-get update; apt upgrade -y; apt-get install -y mariadb-server mariadb-client;
 
 timedatectl set-timezone UTC;
 
 mysql_secure_installation;
+
+apt autoremove -y;
