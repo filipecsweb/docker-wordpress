@@ -21,6 +21,7 @@ curl -sS https://getcomposer.org/installer | php;
 mv composer.phar /usr/local/bin/composer;
 
 apt-get update; apt upgrade -y; apt-get install -y zip nginx php7.4-fpm
+unlink /etc/nginx/sites-enabled/default
 
 apt autoremove -y;
 
@@ -70,10 +71,10 @@ apt update -y && apt install apache2 -y && apt autoremove -y \
 && a2dissite 000-default.conf \
 && wget https://mirrors.edge.kernel.org/ubuntu/pool/multiverse/liba/libapache-mod-fastcgi/libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb \
 && dpkg -i libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb \
-&& systemctl reload apache2 \
+&& systemctl restart apache2 \
 && echo -en '<IfModule mod_fastcgi.c>\nAddHandler fastcgi-script .fcgi\n#FastCgiWrapper /usr/lib/apache2/suexec\nFastCgiIpcDir /var/lib/apache2/fastcgi\n</IfModule>' > /etc/apache2/mods-enabled/fastcgi.conf \
 && echo 'Listen 8080' > /etc/apache2/ports.conf \
-&& systemctl reload apache2 \
+&& systemctl restart apache2 \
 && apt update && apt install -y libapache2-mod-php libapache2-mod-fcgid \
 && a2enmod actions fcgid proxy proxy_fcgi proxy_http fastcgi alias rewrite \
 && systemctl restart apache2
