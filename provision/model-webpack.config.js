@@ -133,7 +133,7 @@ module.exports = (env, options) => {
                     ]
                 },
                 {
-                    test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+                    test: /\.(ttf|otf|eot|woff)(\?v=\d+\.\d+\.\d+)?$/,
                     exclude: /node_modules/,
                     loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
                 },
