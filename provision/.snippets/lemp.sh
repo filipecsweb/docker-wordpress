@@ -20,7 +20,7 @@ apt autoremove -y;
 curl -sS https://getcomposer.org/installer | php;
 mv composer.phar /usr/local/bin/composer;
 
-apt-get update; apt upgrade -y; apt-get install -y zip nginx php7.4-fpm
+apt-get update; apt-get install -y zip nginx php7.4-fpm
 unlink /etc/nginx/sites-enabled/default
 
 apt autoremove -y;
@@ -104,7 +104,7 @@ cp ioncube/ioncube_loader_lin_7.4.so /usr/lib/php/20190902/ \
 && systemctl restart php7.4-fpm
 
 # Install MariaDB
-apt-get update; apt upgrade -y; apt-get install -y mariadb-server mariadb-client;
+apt-get update; apt-get install -y mariadb-server mariadb-client;
 
 timedatectl set-timezone UTC;
 
