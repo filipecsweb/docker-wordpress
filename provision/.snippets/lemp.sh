@@ -66,20 +66,20 @@ apt-get install webp -y
 apt autoremove -y;
 
 # Install Apache
-apt update -y && apt install apache2 -y && apt autoremove -y \
-&& cd /tmp \
-&& a2dissite 000-default.conf \
-&& wget https://mirrors.edge.kernel.org/ubuntu/pool/multiverse/liba/libapache-mod-fastcgi/libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb \
-&& dpkg -i libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb \
-&& systemctl restart apache2 \
-&& echo -en '<IfModule mod_fastcgi.c>\nAddHandler fastcgi-script .fcgi\n#FastCgiWrapper /usr/lib/apache2/suexec\nFastCgiIpcDir /var/lib/apache2/fastcgi\n</IfModule>' > /etc/apache2/mods-enabled/fastcgi.conf \
-&& echo 'Listen 8080' > /etc/apache2/ports.conf \
-&& systemctl restart apache2 \
-&& apt update && apt install -y libapache2-mod-php libapache2-mod-fcgid \
-&& a2enmod actions fcgid proxy proxy_fcgi proxy_http fastcgi alias rewrite \
-&& systemctl restart apache2
+apt update -y && apt install apache2 -y && apt autoremove -y
+cd /tmp
+a2dissite 000-default.conf
+wget https://mirrors.edge.kernel.org/ubuntu/pool/multiverse/liba/libapache-mod-fastcgi/libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb
+dpkg -i libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb
+systemctl restart apache2
+echo -en '<IfModule mod_fastcgi.c>\nAddHandler fastcgi-script .fcgi\n#FastCgiWrapper /usr/lib/apache2/suexec\nFastCgiIpcDir /var/lib/apache2/fastcgi\n</IfModule>' > /etc/apache2/mods-enabled/fastcgi.conf
+echo 'Listen 8080' > /etc/apache2/ports.conf
+systemctl restart apache2
+apt update && apt install -y libapache2-mod-php libapache2-mod-fcgid
+a2enmod actions fcgid proxy proxy_fcgi proxy_http fastcgi alias rewrite
+systemctl restart apache2
 
-# Install Certbot
+# Install Certbot (ENTER is asked here)
 add-apt-repository ppa:certbot/certbot;
 apt install -y python-certbot-nginx;
 
