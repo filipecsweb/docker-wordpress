@@ -2,6 +2,7 @@
 !/.gitignore
 
 #F
+/*.pem
 /*.sh
 /ads.txt
 /Bing*
