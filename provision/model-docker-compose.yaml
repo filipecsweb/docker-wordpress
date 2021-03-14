@@ -22,6 +22,7 @@ services:
     restart: always
     ports:
       - 80:80
+      - 443:443
     volumes:
       - ./Docker/log/:/var/log/nginx # Directory names can't be the same.
       - ./Docker/site.conf:/etc/nginx/conf.d/site.conf
@@ -40,6 +41,9 @@ services:
     links:
       - nginx:${DOMAIN}
     user: "1000:1000" # Replace these IDs with your sysuser ID.
+    dns:
+      - 208.67.222.222
+      - 208.67.222.220
   phpmyadmin:
     container_name: ${SLUG}_phpmyadmin # Works like and ID. IT has to be unique.
     depends_on:
