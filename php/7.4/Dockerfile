@@ -59,13 +59,14 @@ RUN { \
 		echo 'opcache.fast_shutdown=1'; \
 	} > /usr/local/etc/php/conf.d/opcache-recommended.ini
 
-# Install extensions to work with https://github.com/spatie/image-optimizer
+# Install extensions to work with https://github.com/spatie/image-optimizer and others.
 RUN apt-get update; \
     apt-get install jpegoptim -y; \
     apt-get install optipng -y; \
     apt-get install pngquant -y; \
     apt-get install gifsicle -y; \
-    apt-get install webp -y;
+    apt-get install webp -y; \
+    apt-get install dnsutils -y;
 
 # Install WP-CLI
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar; \
