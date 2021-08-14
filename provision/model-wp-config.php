@@ -11,7 +11,7 @@ define( 'DB_HOST', $_ENV['DB_HOST'] );
 define( 'DB_CHARSET', 'utf8mb4' );
 define( 'DB_COLLATE', '' );
 
-define( 'WP_STATIC_HOME', "http://s.{$_ENV['WP_DOMAIN']}" ); # NON-native.
+define( 'WP_STATIC_HOME', "http://{$_ENV['WP_DOMAIN']}" ); # NON-native.
 define( 'WP_HOME', "http://{$_ENV['WP_DOMAIN']}" );
 define( 'WP_SITEURL', WP_HOME );
 
