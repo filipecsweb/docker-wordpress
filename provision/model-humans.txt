@@ -1,7 +1,6 @@
 /* TEAM */
 Web developer: Filipe Seabra
-Twitter: @filipecsweb
-Instagram: @filipecsweb
+Instagram: @filipenaweb
 From: Goiânia, Brazil
 
 /* SITE */
