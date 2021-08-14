@@ -16,11 +16,11 @@ $home_page_id = wp_insert_post( [
 	'post_type'    => 'page',
 ], true );
 
-update_post_meta( $id, '_wp_page_template', 'template-home.php' );
+update_post_meta( $home_page_id, '_wp_page_template', 'template-home.php' );
 
 if ( function_exists( 'update_field' ) ) {
-	update_field( 'is_full_width', '1', $id );
-	update_field( 'show_breadcrumbs', '0', $id );
+	update_field( 'is_full_width', '1', $home_page_id );
+	update_field( 'show_breadcrumbs', '0', $home_page_id );
 }
 
 // Update user.
