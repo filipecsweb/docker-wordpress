@@ -73,6 +73,13 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
     chmod +x wp-cli.phar; \
     mv wp-cli.phar /usr/local/bin/wp;
 
+# Install composer
+RUN cd ~; \
+    curl -sS https://getcomposer.org/installer -o composer-setup.php; \
+    php composer-setup.php --install-dir=/usr/local/bin --filename=composer; \
+    rm -f composer-setup.php; \
+    composer self-update --1;
+
 # Install mariadb-client
 # https://downloads.mariadb.org/mariadb/repositories/#mirror=UFSCar&distro=Debian&distro_release=stretch--stretch&version=10.3
 RUN apt-get update; \
