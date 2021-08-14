@@ -69,7 +69,7 @@ if ( ! is_wp_error( $menu_id ) ) {
 	] );
 
 	set_theme_mod( 'nav_menu_locations', [
-		'primary-menu' => $menu_id,
+		'primary_navigation' => $menu_id,
 	] );
 }
 
