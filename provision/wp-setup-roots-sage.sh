@@ -59,7 +59,9 @@ mv ${_docker_wordpress_dir}/provision/mu-plugins ./wp-content/; \
 
 # Theme.
 docker exec -it "${_slug}_php" wp theme delete --all --force
-docker exec -it "${_slug}_php" cd /var/www/html/wp-content/themes && composer create-project roots/sage ss
+docker exec -it "${_slug}_php" bash -c "cd /var/www/html/wp-content/themes && composer create-project roots/sage ss"
+## @url https://roots.io/guides/using-acf-builder-with-sage/
+docker exec -it "${_slug}_php" bash -c "cd /var/www/html/wp-content/themes && composer require stoutlogic/acf-builder"
 docker exec -it "${_slug}_php" wp theme activate ss/resources
 
 # Removals.
