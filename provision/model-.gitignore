@@ -1,6 +1,17 @@
 /.*
 !/.gitignore
 
+# license/readme/changelog files
+[lL][iI][cC][eE][nN][sS][eE].[tT][xX][tT]
+[lL][iI][cC][eE][nN][sS][eE].[mM][dD]
+[lL][iI][cC][eE][nN][sS][eE].[hH][tT][mM][lL]
+[rR][eE][aA][dD][mM][eE].[tT][xX][tT]
+[rR][eE][aA][dD][mM][eE].[mM][dD]
+[rR][eE][aA][dD][mM][eE].[hH][tT][mM][lL]
+[cC][hH][aA][nN][gG][eE][lL][oO][gG].[tT][xX][tT]
+[cC][hH][aA][nN][gG][eE][lL][oO][gG].[mM][dD]
+[cC][hH][aA][nN][gG][eE][lL][oO][gG].[hH][tT][mM][lL]
+
 #F
 /*.pem
 /*.sh
@@ -8,8 +19,6 @@
 /Bing*
 /google*
 /loaderio-*
-/license.txt
-/readme.html
 /wp-config.php
 *.cache
 *.log
@@ -19,7 +28,6 @@
 *.zip
 .DS_Store
 log/*
-robots.txt
 wp-content/advanced-cache.php
 wp-content/db.php
 wp-content/mu-plugins/0-worker.php
@@ -31,10 +39,10 @@ wp-cli.local.yml
 __MACOSX/
 node_modules/
 wp-content/cache/
-wp-content/languages/
+wp-content/languages/*
 wp-content/plugins/query-monitor/
 wp-content/plugins/worker/
 wp-content/upgrade/
-wp-content/uploads/
+wp-content/uploads/*
 
 # Custom
