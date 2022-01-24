@@ -91,8 +91,7 @@ module.exports = (env, options) => {
     return {
         entry: {
             bundle: src_path + '/js/bundle.js',
-            'bundle-admin': src_path + '/js/bundle-admin.js',
-            'bundle-login-page': src_path + '/js/bundle-login-page.js'
+            'bundle-admin': src_path + '/js/bundle-admin.js'
         },
         output: {
             filename: '[name].js',
