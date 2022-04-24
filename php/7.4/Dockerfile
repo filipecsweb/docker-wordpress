@@ -66,7 +66,8 @@ RUN apt-get update; \
 # Install WP-CLI
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar; \
     chmod +x wp-cli.phar; \
-    mv wp-cli.phar /usr/local/bin/wp;
+    mv wp-cli.phar /usr/local/bin/wp; \
+    wp package install schlessera/wp-cli-psysh --allow-root;
 
 # Install composer
 RUN cd ~; \
@@ -86,5 +87,9 @@ RUN bash \
     && apt-get update \
     && apt-get install -y mariadb-client \
     && rm -rf /var/lib/apt/lists/*
+
+# docker user is created with UID 1000 and GID 1000.
+RUN useradd -ms /bin/bash docker; \
+    cp -r ~/.wp-cli /home/docker/;
 
 CMD ["php-fpm"]
