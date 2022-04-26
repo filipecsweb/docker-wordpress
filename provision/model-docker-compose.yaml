@@ -18,7 +18,7 @@ services:
       - 3306:3306
   nginx:
     container_name: ${SLUG}_nginx
-    image: nginx:1.17.0
+    image: nginx:1.20.2
     restart: always
     ports:
       - 80:80
