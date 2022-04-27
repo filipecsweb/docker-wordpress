@@ -1,4 +1,4 @@
-version: '3'
+version: '3.3'
 
 volumes:
   db_var_lib_mysql: {}
@@ -44,22 +44,22 @@ services:
     dns:
       - 208.67.222.222
       - 208.67.222.220
-  phpmyadmin:
-    container_name: ${SLUG}_phpmyadmin # Works like and ID. IT has to be unique.
-    depends_on:
-      - mariadb
-    image: phpmyadmin/phpmyadmin:4.8.5
-    ports:
-      - 8080:80
-    environment:
-      - "PMA_ARBITRARY=1"
-      - "PMA_HOST=${DB_HOST}"
-      - "PMA_USER=${DB_USER}"
-      - "PMA_PASSWORD=${DB_PASSWORD}"
-  mailhog:
-    container_name: ${SLUG}_mailhog
-    image: mailhog/mailhog:latest
-    restart: always
-    ports:
-      - 1025:1025
-      - 8025:8025
+#  phpmyadmin:
+#    container_name: ${SLUG}_phpmyadmin # Works like and ID. IT has to be unique.
+#    depends_on:
+#      - mariadb
+#    image: phpmyadmin/phpmyadmin:4.8.5
+#    ports:
+#      - 8080:80
+#    environment:
+#      - "PMA_ARBITRARY=1"
+#      - "PMA_HOST=${DB_HOST}"
+#      - "PMA_USER=${DB_USER}"
+#      - "PMA_PASSWORD=${DB_PASSWORD}"
+#  mailhog:
+#    container_name: ${SLUG}_mailhog
+#    image: mailhog/mailhog:latest
+#    restart: always
+#    ports:
+#      - 1025:1025
+#      - 8025:8025
