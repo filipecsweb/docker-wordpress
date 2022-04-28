@@ -5,7 +5,7 @@ volumes:
 
 services:
   db:
-    container_name: ${CONTAINER_PREFIX}_mariadb # Works like and ID. IT has to be unique.
+    container_name: ${CONTAINER_PREFIX}_db # Works like and ID. IT has to be unique.
     volumes:
       - db_var_lib_mysql:/var/lib/mysql
     command: --max_allowed_packet=2147483648
@@ -35,7 +35,7 @@ services:
     image: filipecsweb/wordpress:php-7.4-fpm
     restart: always
     depends_on:
-      - mariadb
+      - db
     volumes:
       - ./development/docker-php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
       - ./:/var/www/html
@@ -54,7 +54,7 @@ services:
 #  phpmyadmin:
 #    container_name: ${CONTAINER_PREFIX}_phpmyadmin # Works like and ID. IT has to be unique.
 #    depends_on:
-#      - mariadb
+#      - db
 #    image: phpmyadmin/phpmyadmin:4.8.5
 #    ports:
 #      - 8080:80

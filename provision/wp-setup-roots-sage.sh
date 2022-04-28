@@ -15,18 +15,19 @@ mv ${_docker_wordpress_dir}/provision/development ./
 mv ${_docker_wordpress_dir}/provision/.eval-generate-cpt.php ./
 mv ${_docker_wordpress_dir}/provision/DEVELOPMENT-CHECKLIST.md ./
 mv ${_docker_wordpress_dir}/provision/model-.dockerignore ./.dockerignore
-cp ${_docker_wordpress_dir}/provision/development/setup/.model-.env ./.env
 mv ${_docker_wordpress_dir}/provision/model-docker-compose.yaml ./docker-compose.yaml
 mv ${_docker_wordpress_dir}/provision/model-package.json ./package.json
 mv ${_docker_wordpress_dir}/provision/model-webpack.config.js ./webpack.config.js
 mv ${_docker_wordpress_dir}/provision/model-.gitignore ./.gitignore
 mv ${_docker_wordpress_dir}/provision/model-wp-cli.local.yml ./wp-cli.local.yml
-cp ${_docker_wordpress_dir}/provision/development/setup/.model-wp-config.php ./wp-config.php
-cp ${_docker_wordpress_dir}/provision/development/setup/.model-wp-config-local.php ./wp-config-local.php
+cp ./development/setup/.model-.env ./.env
+cp ./development/setup/.model-wp-config.php ./wp-config.php
+cp ./development/setup/.model-wp-config-local.php ./wp-config-local.php
 # Will be removed.
 mv ${_docker_wordpress_dir}/provision/wp-setup.php ./
 sudo chown -R "$USER":"$USER" .
-sed -i '' -e "s/\$_SLUG/${_slug}/g" ./.env; sed -i '' -e "s/\$_SLUG/${_slug}/g" ./development/setup/docker-nginx/default.conf;
+sed -i '' -e "s/\$_SLUG/${_slug}/g" ./.env;
+sed -i '' -e "s/\$_SLUG/${_slug}/g" ./development/setup/docker-nginx/default.conf;
 
 # WordPress setup.
 docker stop $(docker ps -q);
