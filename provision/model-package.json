@@ -4,7 +4,7 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "docker stop $(docker ps -q); docker-compose up --force-recreate",
+    "start": "docker stop $(docker ps -q); docker-compose up --force-recreate --build",
     "build-dev": "webpack --mode development --config webpack.config.js",
     "build-prod": "webpack --mode production --config webpack.config.js",
     "watch": "webpack --watch --progress --mode development --info-verbosity verbose --config webpack.config.js"

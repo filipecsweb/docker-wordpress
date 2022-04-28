@@ -1,4 +1,5 @@
 read -p "Enter slug: " _slug
+read -p "User id and group id (e.g. 1000:1000): " _uid_gid
 
 _domain=localhost.${_slug}
 _url=http://${_domain}
@@ -25,15 +26,14 @@ cp ./development/setup/.model-wp-config-local.php ./wp-config-local.php
 # Will be removed.
 mv ${_docker_wordpress_dir}/provision/wp-setup.php ./
 sudo chown -R "$USER":"$USER" .
+sed -i -e "s/\$UID:\$GID/${_uid_gid}/g" ./.env;
 sed -i -e "s/\$_SLUG/${_slug}/g" ./.env;
-sed -i -e "s/\$UID/${UID}/g" ./.env;
-sed -i -e "s/\$GID/${GID}/g" ./.env;
-sed -i -e "s/\$_SLUG/${_slug}/g" ./development/setup/docker-nginx/default.conf;
+sed -i -e "s/\$_SLUG/${_slug}/g" ./development/docker-nginx/default.conf;
 
 # WordPress setup.
 docker stop $(docker ps -q);
 sleep 1;
-docker-compose up -d --force-recreate;
+docker-compose up -d --force-recreate --build;
 sleep 5;
 docker exec -it "${_slug}_php" wp core download --force --locale=${_locale}
 docker exec -it "${_slug}_php" wp core install --url="${_url}" --title=Title --admin_user=filipe --admin_password="123" --admin_email=filipecseabra@gmail.com --skip-email

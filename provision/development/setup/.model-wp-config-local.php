@@ -1,6 +1,5 @@
 <?php
 
-define("WP_ENVIRONMENT_TYPE", $_ENV["WP_ENVIRONMENT_TYPE"]);
 define('DB_HOST', $_ENV["DB_HOST"]);
 define('DB_NAME', $_ENV["DB_NAME"]);
 define('DB_PASSWORD', $_ENV["DB_PASSWORD"]);

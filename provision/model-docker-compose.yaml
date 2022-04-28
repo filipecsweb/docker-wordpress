@@ -40,7 +40,7 @@ services:
       - ./development/docker-php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
       - ./:/var/www/html
     links:
-      - nginx:${DOMAIN}
+      - nginx:${SERVER_NAME}
     user: "$CONTAINER_USER"
     environment:
       - "DB_NAME=$DB_NAME"
