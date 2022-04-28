@@ -11,30 +11,28 @@ _locale=pt_BR
 # Will be removed.
 git clone https://github.com/filipecsweb/docker-wordpress.git ${_docker_wordpress_dir}
 
-mv ${_docker_wordpress_dir}/provision/.snippets ./
-mv ${_docker_wordpress_dir}/provision/Docker ./
+mv ${_docker_wordpress_dir}/provision/development ./
 mv ${_docker_wordpress_dir}/provision/.eval-generate-cpt.php ./
-mv ${_docker_wordpress_dir}/provision/model-cf7-form.php ./
 mv ${_docker_wordpress_dir}/provision/DEVELOPMENT-CHECKLIST.md ./
 mv ${_docker_wordpress_dir}/provision/model-.dockerignore ./.dockerignore
-cp ${_docker_wordpress_dir}/provision/model-.env ./.env
-mv ${_docker_wordpress_dir}/provision/model-.env ./
-mv ${_docker_wordpress_dir}/provision/model-.gitignore ./.gitignore
+cp ${_docker_wordpress_dir}/provision/development/setup/.model-.env ./.env
 mv ${_docker_wordpress_dir}/provision/model-docker-compose.yaml ./docker-compose.yaml
-mv ${_docker_wordpress_dir}/provision/model-humans.txt ./humans.txt
 mv ${_docker_wordpress_dir}/provision/model-package.json ./package.json
-mv ${_docker_wordpress_dir}/provision/model-sh-get-db-from-prod.sh ./sh-get-db-from-prod.sh
 mv ${_docker_wordpress_dir}/provision/model-webpack.config.js ./webpack.config.js
+mv ${_docker_wordpress_dir}/provision/model-.gitignore ./.gitignore
 mv ${_docker_wordpress_dir}/provision/model-wp-cli.local.yml ./wp-cli.local.yml
-cp ${_docker_wordpress_dir}/provision/model-wp-config.php ./wp-config.php
-mv ${_docker_wordpress_dir}/provision/model-wp-config.php ./
+cp ${_docker_wordpress_dir}/provision/development/setup/.model-wp-config.php ./wp-config.php
+cp ${_docker_wordpress_dir}/provision/development/setup/.model-wp-config-local.php ./wp-config-local.php
 # Will be removed.
 mv ${_docker_wordpress_dir}/provision/wp-setup.php ./
 sudo chown -R "$USER":"$USER" .
-sed -i '' -e "s/\$_SLUG/${_slug}/g" ./.env; sed -i '' -e "s/\$_SLUG/${_slug}/g" ./Docker/site.conf;
+sed -i '' -e "s/\$_SLUG/${_slug}/g" ./.env; sed -i '' -e "s/\$_SLUG/${_slug}/g" ./development/setup/docker-nginx/default.conf;
 
 # WordPress setup.
-docker stop $(docker ps -q); docker-compose up -d --force-recreate; sleep 10
+docker stop $(docker ps -q);
+sleep 1;
+docker-compose up -d --force-recreate;
+sleep 5;
 docker exec -it "${_slug}_php" wp core download --force --locale=${_locale}
 docker exec -it "${_slug}_php" wp core install --url="${_url}" --title=Title --admin_user=filipe --admin_password="${_admin_password}" --admin_email=filipecseabra@gmail.com --skip-email
 docker exec -it "${_slug}_php" wp rewrite flush
@@ -61,7 +59,6 @@ docker exec -it "${_slug}_php" wp eval-file wp-setup.php
 
 # After WordPress setup.
 git clone https://github.com/filipecsweb/wp-media-compression.git ./wp-content/plugins/ss-media-compression; \
-mv ${_docker_wordpress_dir}/provision/mu-plugins ./wp-content/; \
 
 # Install dependencies.
 npm install
