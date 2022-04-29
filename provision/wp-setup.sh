@@ -19,9 +19,9 @@ mv ${_docker_wordpress_dir}/provision/model-package.json ./package.json
 mv ${_docker_wordpress_dir}/provision/model-webpack.config.js ./webpack.config.js
 mv ${_docker_wordpress_dir}/provision/model-.gitignore ./.gitignore
 mv ${_docker_wordpress_dir}/provision/model-wp-cli.local.yml ./wp-cli.local.yml
-cp ./development/setup/.model-.env ./.env
-cp ./development/setup/.model-wp-config.php ./wp-config.php
+mv ${_docker_wordpress_dir}/provision/model-wp-config.php ./wp-config.php
 cp ./development/setup/.model-wp-config-local.php ./wp-config-local.php
+cp ./development/setup/.model-.env ./.env
 # Will be removed.
 mv ${_docker_wordpress_dir}/provision/wp-setup.php ./
 sudo chown -R "$USER":"$USER" .
@@ -30,7 +30,7 @@ sed -i -e "s/\$_SLUG/${_slug}/g" ./.env;
 sed -i -e "s/\$_SLUG/${_slug}/g" ./development/docker-nginx/default.conf;
 
 # WordPress setup.
-docker stop $(docker ps -q);
+docker stop "$(docker ps -q)";
 sleep 1;
 docker-compose up -d --force-recreate --build;
 sleep 5;
@@ -72,9 +72,6 @@ docker exec -it "${_slug}_php" wp theme activate ss
 # Removals.
 find ${_wp_content_dir} -name '.git*' -exec rm -rf {} \;
 rm -rf ${_docker_wordpress_dir} .github CHANGELOG.md LICENSE.md readme.html wp-config-sample.php wp-setup.php
-
-# Other stuff.
-touch .eval-file.php
 
 # Delete itself.
 rm -f wp-setup.sh

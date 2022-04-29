@@ -1,5 +1,5 @@
 read -p "Enter slug: " _slug
-read -p "User id and group id (e.g. 1000:1000): " _uid_gid
+read -p "Your user id and group id (e.g. 1000:1000): " _uid_gid
 
 _domain=localhost.${_slug}
 _url=http://${_domain}
@@ -8,27 +8,23 @@ _wp_content_dir=./wp-content
 _locale=pt_BR
 
 # Environment setup.
-# Will be removed.
 git clone https://github.com/filipecsweb/docker-wordpress.git ${_docker_wordpress_dir}
 
 mv ${_docker_wordpress_dir}/provision/development ./
 mv ${_docker_wordpress_dir}/provision/model-.dockerignore ./.dockerignore
 mv ${_docker_wordpress_dir}/provision/model-docker-compose.yaml ./docker-compose.yaml
-mv ${_docker_wordpress_dir}/provision/model-package.json ./package.json
 mv ${_docker_wordpress_dir}/provision/model-.gitignore ./.gitignore
 mv ${_docker_wordpress_dir}/provision/model-wp-cli.local.yml ./wp-cli.local.yml
-cp ./development/setup/.model-.env ./.env
-cp ./development/setup/.model-wp-config.php ./wp-config.php
+mv ${_docker_wordpress_dir}/provision/model-wp-config.php ./wp-config.php
 cp ./development/setup/.model-wp-config-local.php ./wp-config-local.php
-# Will be removed.
+cp ./development/setup/.model-.env ./.env
 mv ${_docker_wordpress_dir}/provision/wp-setup.php ./
-sudo chown -R "$USER":"$USER" .
 sed -i -e "s/\$UID:\$GID/${_uid_gid}/g" ./.env;
 sed -i -e "s/\$_SLUG/${_slug}/g" ./.env;
 sed -i -e "s/\$_SLUG/${_slug}/g" ./development/docker-nginx/default.conf;
 
 # WordPress setup.
-docker stop $(docker ps -q);
+docker stop "$(docker ps -q)";
 sleep 1;
 docker-compose up -d --force-recreate --build;
 sleep 5;
@@ -52,21 +48,18 @@ docker exec -it "${_slug}_php" wp config shuffle-salts
 docker exec -it "${_slug}_php" wp eval-file wp-setup.php
 
 # After WordPress setup.
-git clone https://github.com/filipecsweb/wp-media-compression.git ./wp-content/plugins/ss-media-compression; \
+git clone git@github.com:filipecsweb/wpss-theme-tweaks.git
+touch robots.txt
 
 # Theme.
 docker exec -it "${_slug}_php" wp theme delete --all --force
 docker exec -it "${_slug}_php" bash -c "cd /var/www/html/wp-content/themes && composer create-project roots/sage ss"
-## @url https://roots.io/guides/using-acf-builder-with-sage/
 docker exec -it "${_slug}_php" bash -c "cd /var/www/html/wp-content/themes/ss && composer require stoutlogic/acf-builder"
 docker exec -it "${_slug}_php" wp theme activate ss
 
 # Removals.
 find ${_wp_content_dir} -name '.git*' -exec rm -rf {} \;
 rm -rf ${_docker_wordpress_dir} .github CHANGELOG.md LICENSE.md readme.html license.txt wp-config-sample.php wp-setup.php
-
-# Other stuff.
-touch .eval-file.php
 
 # Delete itself.
 rm -f wp-setup-roots-sage.sh
