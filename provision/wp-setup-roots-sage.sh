@@ -12,10 +12,11 @@ git clone https://github.com/filipecsweb/docker-wordpress.git ${_docker_wordpres
 
 mv ${_docker_wordpress_dir}/provision/development ./
 mv ${_docker_wordpress_dir}/provision/model-.dockerignore ./.dockerignore
-mv ${_docker_wordpress_dir}/provision/model-docker-compose.yaml ./docker-compose.yaml
 mv ${_docker_wordpress_dir}/provision/model-.gitignore ./.gitignore
 mv ${_docker_wordpress_dir}/provision/model-wp-cli.local.yml ./wp-cli.local.yml
 mv ${_docker_wordpress_dir}/provision/model-wp-config.php ./wp-config.php
+mv ${_docker_wordpress_dir}/provision/sage/model-docker-compose.yaml ./docker-compose.yaml
+mv ${_docker_wordpress_dir}/provision/sage/model-package.json ./package.json
 cp ./development/setup/.model-wp-config-local.php ./wp-config-local.php
 cp ./development/setup/.model-.env ./.env
 mv ${_docker_wordpress_dir}/provision/wp-setup.php ./

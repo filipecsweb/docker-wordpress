@@ -1,0 +1,72 @@
+version: '3.9'
+
+volumes:
+  db_var_lib_mysql: {}
+
+services:
+  db:
+    container_name: ${CONTAINER_PREFIX}_db # Works like and ID. IT has to be unique.
+    volumes:
+      - db_var_lib_mysql:/var/lib/mysql
+    command: --max_allowed_packet=2147483648
+    environment:
+      - "MYSQL_ROOT_PASSWORD=root"
+      - "MYSQL_DATABASE=$DB_NAME"
+      - "MYSQL_USER=$DB_USER"
+      - "MYSQL_PASSWORD=$DB_PASSWORD"
+    image: mariadb:${MARIADB_MAJOR:-10.4.5}
+    ports:
+      - 3306:3306
+  nginx:
+    container_name: ${CONTAINER_PREFIX}_nginx
+    image: nginx:1.20.2
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./development/docker-nginx/log/:/var/log/nginx # Directory names can't be the same.
+      - ./development/docker-nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./development/docker-nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./:/var/www/html
+    working_dir: /var/www/html
+  php:
+    container_name: ${CONTAINER_PREFIX}_php # Works like and ID. IT has to be unique.
+    image: filipecsweb/wordpress:php-8.0-fpm
+    restart: always
+    depends_on:
+      - db
+    volumes:
+      - ./development/docker-php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+      - ./:/var/www/html
+    links:
+      - nginx:${SERVER_NAME}
+    user: "$CONTAINER_USER"
+    environment:
+      - "DB_NAME=$DB_NAME"
+      - "DB_USER=$DB_USER"
+      - "DB_PASSWORD=$DB_PASSWORD"
+      - "DB_HOST=$DB_HOST"
+      - "SERVER_NAME=$SERVER_NAME"
+    dns:
+      - 208.67.222.222
+      - 208.67.222.220
+#  phpmyadmin:
+#    container_name: ${CONTAINER_PREFIX}_phpmyadmin # Works like and ID. IT has to be unique.
+#    depends_on:
+#      - db
+#    image: phpmyadmin/phpmyadmin:4.8.5
+#    ports:
+#      - 8080:80
+#    environment:
+#      - "PMA_ARBITRARY=1"
+#      - "PMA_HOST=${DB_HOST}"
+#      - "PMA_USER=${DB_USER}"
+#      - "PMA_PASSWORD=${DB_PASSWORD}"
+#  mailhog:
+#    container_name: ${CONTAINER_PREFIX}_mailhog
+#    image: mailhog/mailhog:latest
+#    restart: always
+#    ports:
+#      - 1025:1025
+#      - 8025:8025
