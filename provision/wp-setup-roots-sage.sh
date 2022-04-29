@@ -14,7 +14,7 @@ mv ${_docker_wordpress_dir}/provision/development ./
 mv ${_docker_wordpress_dir}/provision/model-.dockerignore ./.dockerignore
 mv ${_docker_wordpress_dir}/provision/model-.gitignore ./.gitignore
 mv ${_docker_wordpress_dir}/provision/model-wp-cli.local.yml ./wp-cli.local.yml
-mv ${_docker_wordpress_dir}/provision/model-wp-config.php ./wp-config.php
+mv ${_docker_wordpress_dir}/provision/sage/model-wp-config.php ./wp-config.php
 mv ${_docker_wordpress_dir}/provision/sage/model-docker-compose.yaml ./docker-compose.yaml
 mv ${_docker_wordpress_dir}/provision/sage/model-package.json ./package.json
 cp ./development/setup/.model-wp-config-local.php ./wp-config-local.php
@@ -23,6 +23,9 @@ mv ${_docker_wordpress_dir}/provision/wp-setup.php ./
 sed -i -e "s/\$UID:\$GID/${_uid_gid}/g" ./.env;
 sed -i -e "s/\$_SLUG/${_slug}/g" ./.env;
 sed -i -e "s/\$_SLUG/${_slug}/g" ./development/docker-nginx/default.conf;
+
+# Acorn.
+docker exec -it "${_slug}_php" bash -c "cd /var/www/html && composer require roots/acorn 2.0.5"
 
 # WordPress setup.
 docker stop "$(docker ps -q)";

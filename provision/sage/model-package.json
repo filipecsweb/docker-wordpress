@@ -1,5 +1,5 @@
 {
   "scripts": {
-    "start": "docker stop $(docker ps -q); docker-compose up --force-recreate --build",
+    "start": "docker stop $(docker ps -q); docker-compose up --force-recreate --build"
   }
 }
