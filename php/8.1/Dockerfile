@@ -97,10 +97,9 @@ RUN cd ~; \
 # https://downloads.mariadb.org/mariadb/repositories/#mirror=UFSCar&distro=Debian&distro_release=stretch--stretch&version=10.3
 RUN apt-get update; \
     apt-get install -y software-properties-common dirmngr
-RUN apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xF1656F24C74CD1D8
 RUN bash \
-    && MARIADB_MAJOR=${MARIADB_MAJOR:-10.5} \
-    && add-apt-repository "deb [arch=amd64,i386,ppc64el] http://mirror.ufscar.br/mariadb/repo/${MARIADB_MAJOR}/debian stretch main" \
+    && MARIADB_MAJOR=${MARIADB_MAJOR:-10.6} \
+    && curl -LsS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | bash -s -- --mariadb-server-version=${MARIADB_MAJOR} --skip-maxscale --skip-tools \
     && apt-get update \
     && apt-get install -y mariadb-client \
     && rm -rf /var/lib/apt/lists/*
