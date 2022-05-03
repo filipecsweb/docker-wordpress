@@ -20,7 +20,7 @@ mv ${_docker_wordpress_dir}/provision/sage/model-package.json ./package.json
 cp ./development/setup/.model-wp-config-local.php ./wp-config-local.php
 cp ./development/setup/.model-.env ./.env
 mv ${_docker_wordpress_dir}/provision/wp-setup.php ./
-sed -i -e "s/\$UID:\$GID/${_uid_gid}/g" ./.env;
+sed -i -e "s/\$_UID:\$_GID/${_uid_gid}/g" ./.env;
 sed -i -e "s/\$_SLUG/${_slug}/g" ./.env;
 sed -i -e "s/\$_SLUG/${_slug}/g" ./development/docker-nginx/default.conf;
 
@@ -52,7 +52,7 @@ docker exec -it "${_slug}_php" wp config shuffle-salts
 docker exec -it "${_slug}_php" wp eval-file wp-setup.php
 
 # After WordPress setup.
-git clone git@github.com:filipecsweb/wpss-theme-tweaks.git
+git clone git@github.com:filipecsweb/wpss-theme-tweaks.git ./wp-content/plugins/wpss-theme-tweaks; \
 touch robots.txt
 
 # Theme.

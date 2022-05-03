@@ -99,7 +99,7 @@ RUN apt-get update; \
     apt-get install -y software-properties-common dirmngr
 RUN apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xF1656F24C74CD1D8
 RUN bash \
-    && MARIADB_MAJOR=${MARIADB_MAJOR:-10.4} \
+    && MARIADB_MAJOR=${MARIADB_MAJOR:-10.5} \
     && add-apt-repository "deb [arch=amd64,i386,ppc64el] http://mirror.ufscar.br/mariadb/repo/${MARIADB_MAJOR}/debian stretch main" \
     && apt-get update \
     && apt-get install -y mariadb-client \

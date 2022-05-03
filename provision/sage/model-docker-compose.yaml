@@ -14,7 +14,7 @@ services:
       - "MYSQL_DATABASE=$DB_NAME"
       - "MYSQL_USER=$DB_USER"
       - "MYSQL_PASSWORD=$DB_PASSWORD"
-    image: mariadb:${MARIADB_MAJOR:-10.4.5}
+    image: mariadb:${MARIADB_MAJOR:-10.5}
     ports:
       - 3306:3306
   nginx:
