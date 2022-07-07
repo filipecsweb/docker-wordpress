@@ -16,7 +16,6 @@
 /Bing*
 /google*
 /loaderio-*
-/wp-config.php
 *.cache
 *.log
 *.tar.gz

@@ -24,11 +24,8 @@ sed -i -e "s/\$_UID:\$_GID/${_uid_gid}/g" ./.env;
 sed -i -e "s/\$_SLUG/${_slug}/g" ./.env;
 sed -i -e "s/\$_SLUG/${_slug}/g" ./development/docker-nginx/default.conf;
 
-# Acorn.
-docker exec -it "${_slug}_php" bash -c "cd /var/www/html && composer require roots/acorn 2.0.5"
-
 # WordPress setup.
-docker stop "$(docker ps -q)";
+docker container stop "$(docker ps -q)";
 sleep 1;
 docker-compose up -d --force-recreate --build;
 sleep 5;
@@ -51,6 +48,9 @@ docker exec -it "${_slug}_php" /bin/bash -c 'wp post delete $(wp post list --pos
 docker exec -it "${_slug}_php" wp config shuffle-salts
 docker exec -it "${_slug}_php" wp eval-file wp-setup.php
 
+# Acorn.
+docker exec -it "${_slug}_php" bash -c "cd /var/www/html && composer require roots/acorn 2.0.5"
+
 # After WordPress setup.
 git clone git@github.com:filipecsweb/wpss-theme-tweaks.git ./wp-content/plugins/wpss-theme-tweaks; \
 touch robots.txt
@@ -58,8 +58,16 @@ touch robots.txt
 # Theme.
 docker exec -it "${_slug}_php" wp theme delete --all --force
 docker exec -it "${_slug}_php" bash -c "cd /var/www/html/wp-content/themes && composer create-project roots/sage ss"
+rm -rf \
+wp-content/themes/ss/CHANGELOG.md
+wp-content/themes/ss/LICENSE.md
+wp-content/themes/ss/README.md
 docker exec -it "${_slug}_php" bash -c "cd /var/www/html/wp-content/themes/ss && composer require stoutlogic/acf-builder"
+docker exec -it "${_slug}_php" bash -c "cd /var/www/html/wp-content/themes/ss && composer require log1x/sage-svg"
 docker exec -it "${_slug}_php" wp theme activate ss
+cd wp-content/themes/ss \
+&& yarn \
+&& yarn build
 
 # Removals.
 find ${_wp_content_dir} -name '.git*' -exec rm -rf {} \;

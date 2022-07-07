@@ -26,7 +26,7 @@ define('WPCF7_ADMIN_READ_CAPABILITY', 'update_core');
 define('WPCF7_ADMIN_READ_WRITE_CAPABILITY', 'update_core');
 
 if ('production' === WP_ENVIRONMENT_TYPE) {
-    if (strpos($_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') !== false) {
+    if (strpos(($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? ''), 'https') !== false) {
         $_SERVER['HTTPS'] = 'on';
     }
 

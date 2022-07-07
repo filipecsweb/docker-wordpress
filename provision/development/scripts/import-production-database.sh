@@ -10,3 +10,5 @@ docker exec ${_local_slug}_php wp db import --skip-plugins --skip-themes _dump_r
 docker exec ${_local_slug}_php wp search-replace "${_remote_domain}" "localhost.${_local_slug}" --skip-plugins --skip-themes --all-tables &&
 docker exec ${_local_slug}_php wp search-replace "https://localhost." "http://localhost." --skip-plugins --skip-themes --all-tables &&
 docker exec ${_local_slug}_php wp transient delete --all
+docker exec ${_local_slug}_php wp plugin install query-monitor --activate
+docker exec cardapis_php sh -c 'wp user update $(wp user list --role=administrator --format=ids) --user_pass=123'

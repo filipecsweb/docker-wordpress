@@ -1,6 +1,6 @@
 <?php
 
-require_once 'vendor/autoload.php';
+require_once __DIR__.'/vendor/autoload.php';
 
 $_ENV = array_merge(
     ($_ENV ?? []),
@@ -25,7 +25,7 @@ define('WPCF7_ADMIN_READ_CAPABILITY', 'update_core');
 define('WPCF7_ADMIN_READ_WRITE_CAPABILITY', 'update_core');
 
 if ('production' === WP_ENVIRONMENT_TYPE) {
-    if (strpos($_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') !== false) {
+    if (strpos(($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? ''), 'https') !== false) {
         $_SERVER['HTTPS'] = 'on';
     }
 
@@ -50,7 +50,7 @@ if ('production' === WP_ENVIRONMENT_TYPE) {
     define('LOGGED_IN_SALT', '/SrA%v3$q7:#vW#B!%T%%]i5Xaco^>f;hIrle9Kzboh2Ep%;<OO#!+-b|HE0@L`V');
     define('NONCE_SALT', '%I!)&`;tiZ:R#3MM!PIbQ9YYj@+`L[dcDDbIgJ[HnXAh6Oh|/Vdd.Z6=POI.3e0u');
 } else {
-    include_once "wp-config-local.php";
+    require __DIR__."/wp-config-local.php";
 
     if ( ! defined("WP_DEBUG")) {
         define('WP_DEBUG', true);

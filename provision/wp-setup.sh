@@ -12,7 +12,6 @@ _locale=pt_BR
 git clone https://github.com/filipecsweb/docker-wordpress.git ${_docker_wordpress_dir}
 
 mv ${_docker_wordpress_dir}/provision/development ./
-mv ${_docker_wordpress_dir}/provision/.eval-generate-cpt.php ./
 mv ${_docker_wordpress_dir}/provision/model-.dockerignore ./.dockerignore
 mv ${_docker_wordpress_dir}/provision/model-docker-compose.yaml ./docker-compose.yaml
 mv ${_docker_wordpress_dir}/provision/model-package.json ./package.json
