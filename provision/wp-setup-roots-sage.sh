@@ -25,7 +25,7 @@ sed -i -e "s/\$_SLUG/${_slug}/g" ./.env;
 sed -i -e "s/\$_SLUG/${_slug}/g" ./development/docker-nginx/default.conf;
 
 # WordPress setup.
-docker container stop "$(docker ps -q)";
+docker container stop $(docker ps -q);
 sleep 1;
 docker-compose up -d --force-recreate --build;
 sleep 5;

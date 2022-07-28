@@ -24,12 +24,12 @@ cp ./development/setup/.model-.env ./.env
 # Will be removed.
 mv ${_docker_wordpress_dir}/provision/wp-setup.php ./
 sudo chown -R "$USER":"$USER" .
-sed -i -e "s/\$UID:\$GID/${_uid_gid}/g" ./.env;
+sed -i -e "s/\$_UID:\$_GID/${_uid_gid}/g" ./.env;
 sed -i -e "s/\$_SLUG/${_slug}/g" ./.env;
 sed -i -e "s/\$_SLUG/${_slug}/g" ./development/docker-nginx/default.conf;
 
 # WordPress setup.
-docker stop "$(docker ps -q)";
+docker container stop $(docker ps -q);
 sleep 1;
 docker-compose up -d --force-recreate --build;
 sleep 5;
@@ -57,10 +57,10 @@ docker exec -it "${_slug}_php" /bin/bash -c 'wp post delete $(wp post list --pos
 docker exec -it "${_slug}_php" wp config shuffle-salts
 docker exec -it "${_slug}_php" wp eval-file wp-setup.php
 
-# After WordPress setup.
-git clone https://github.com/filipecsweb/wp-media-compression.git ./wp-content/plugins/ss-media-compression; \
-
 # Install dependencies.
+echo "12.22.12" > .nvmrc
+nvm install 12.22.12
+nvm use
 npm install
 
 # Theme.
