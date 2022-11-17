@@ -41,7 +41,6 @@ services:
       - ./:/var/www/html
     links:
       - nginx:${SERVER_NAME}
-    user: "$CONTAINER_USER"
     environment:
       - "DB_NAME=$DB_NAME"
       - "DB_USER=$DB_USER"

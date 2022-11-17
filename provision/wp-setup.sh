@@ -59,8 +59,7 @@ docker exec -it "${_slug}_php" wp eval-file wp-setup.php
 
 # Install dependencies.
 echo "12.22.12" > .nvmrc
-nvm install 12.22.12
-nvm use
+nvm install
 npm install
 
 # Theme.
