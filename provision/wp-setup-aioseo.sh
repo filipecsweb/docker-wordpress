@@ -1,3 +1,5 @@
+#! /usr/bin/env bash
+
 read -p "Enter slug: " _slug
 read -p "User id and group id (e.g. 1000:1000): " _uid_gid
 
@@ -28,7 +30,7 @@ sed -i -e "s/\$_SLUG/${_slug}/g" ./.env;
 sed -i -e "s/\$_SLUG/${_slug}/g" ./development/docker-nginx/default.conf;
 
 # WordPress setup.
-docker container stop $(docker ps -q);
+docker container stop "$(docker ps -q)";
 sleep 1;
 docker-compose up -d --force-recreate --build;
 sleep 5;
