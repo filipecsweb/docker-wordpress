@@ -32,7 +32,7 @@ services:
     working_dir: /var/www/html
   php:
     container_name: ${CONTAINER_PREFIX}_php # Works like and ID. IT has to be unique.
-    image: filipecsweb/wordpress:php-7.4-fpm
+    image: filipecsweb/wordpress:php-8.2-fpm
     restart: always
     depends_on:
       - db

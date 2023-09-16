@@ -1,5 +1,3 @@
-#! /usr/bin/env bash
-
 read -p "Enter slug: " _slug
 read -p "User id and group id (e.g. 1000:1000): " _uid_gid
 
