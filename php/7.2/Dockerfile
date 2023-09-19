@@ -80,4 +80,8 @@ RUN bash \
     && apt-get install -y mariadb-client \
     && rm -rf /var/lib/apt/lists/*
 
+# docker user is created with UID 1000 and GID 1000.
+RUN useradd -ms /bin/bash docker; \
+    cp -r ~/.wp-cli /home/docker/;
+
 CMD ["php-fpm"]
