@@ -4,8 +4,10 @@ FROM php:8.1-fpm
 RUN set -eux; \
 	apt-get update; \
 	apt-get install -y --no-install-recommends \
-# Ghostscript is required for rendering PDF previews
 		ghostscript \
+        software-properties-common  \
+        dirmngr \
+        curl \
 	; \
 	rm -rf /var/lib/apt/lists/*
 
@@ -87,10 +89,9 @@ RUN apt-get update; \
     apt-get install jpegoptim optipng pngquant gifsicle webp dnsutils vim -y;
 
 # Install WP-CLI
-RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar; \
-    chmod +x wp-cli.phar; \
-    mv wp-cli.phar /usr/local/bin/wp; \
-    wp package install schlessera/wp-cli-psysh --allow-root;
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+    && chmod +x wp-cli.phar \
+    && mv wp-cli.phar /usr/local/bin/wp
 
 # Install composer
 RUN cd ~; \
@@ -98,19 +99,17 @@ RUN cd ~; \
     php composer-setup.php --install-dir=/usr/local/bin --filename=composer; \
     rm -f composer-setup.php;
 
+SHELL ["/bin/bash", "-c"]
+
 # Install mariadb-client
 # https://downloads.mariadb.org/mariadb/repositories/#mirror=UFSCar&distro=Debian&distro_release=stretch--stretch&version=10.3
-RUN apt-get update; \
-    apt-get install -y software-properties-common dirmngr
-RUN bash \
-    && MARIADB_MAJOR=${MARIADB_MAJOR:-10.6} \
-    && curl -LsS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | bash -s -- --mariadb-server-version=${MARIADB_MAJOR} --skip-maxscale --skip-tools \
+RUN MARIADB_MAJOR=${MARIADB_MAJOR:-11.1} \
+    && curl -LsS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | bash -s -- --mariadb-server-version=mariadb-${MARIADB_MAJOR} --skip-maxscale --skip-tools \
     && apt-get update \
     && apt-get install -y mariadb-client \
     && rm -rf /var/lib/apt/lists/*
 
 # docker user is created with UID 1000 and GID 1000.
-RUN useradd -ms /bin/bash docker; \
-    cp -r ~/.wp-cli /home/docker/;
+RUN useradd -ms /bin/bash docker
 
 CMD ["php-fpm"]
