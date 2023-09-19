@@ -33,6 +33,7 @@ RUN set -ex; \
 		intl \
 		mysqli \
 		zip \
+        sockets \
 	; \
 	pecl install imagick-3.6.0; \
 	docker-php-ext-enable imagick; \
