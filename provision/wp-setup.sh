@@ -64,7 +64,7 @@ npm install
 
 # Theme.
 docker exec -it "${_slug}_php" wp theme delete --all --force
-git clone https://github.com/filipecsweb/wp-theme-ss.git ${_wp_content_dir}/themes/ss
+git clone git@github.com:filipecsweb/wp-theme-ss.git ${_wp_content_dir}/themes/ss
 docker exec -it "${_slug}_php" wp theme activate ss
 
 # Removals.
