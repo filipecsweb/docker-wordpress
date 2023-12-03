@@ -70,6 +70,3 @@ docker exec -it "${_slug}_php" wp theme activate ss
 # Removals.
 find ${_wp_content_dir} -name '.git*' -exec rm -rf {} \;
 rm -rf ${_docker_wordpress_dir} .github CHANGELOG.md LICENSE.md readme.html wp-config-sample.php wp-setup.php
-
-# Delete itself.
-rm -f wp-setup.sh
